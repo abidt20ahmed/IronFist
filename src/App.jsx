@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { DarkThemeToggle, Flowbite } from 'flowbite-react'
 import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
 
       <DarkThemeToggle />
       ...
+      <Footer></Footer>
     </Flowbite>
 
   )
