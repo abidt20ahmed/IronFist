@@ -3,6 +3,7 @@ import { AuthContext } from '../context/AuthProvider';
 
 import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import karate from '../../public/icons8-fist-96.png';
 
 
 const NavBar = () => {
@@ -19,7 +20,7 @@ const NavBar = () => {
         <nav className="bg-[#D01F26] text-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0  dark:border-gray-600">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <div className='flex gap-1'>
-                    <img className='hidden md:block mr-3 h-9' title='Iron Fist' src="" /><span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Iron Fist</span>
+                    <img className='hidden md:block mr-3 h-9 text-black' title='Iron Fist' src={karate} /><span className="self-center text-2xl font-bold whitespace-nowrap dark:text-white">Iron Fist</span>
                 </div>
 
 
