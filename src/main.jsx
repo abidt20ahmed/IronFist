@@ -14,13 +14,13 @@ import AuthProvider from './context/AuthProvider';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Flowbite>
-    <div className=' dark:bg-slate-900'>
+    {/* <div className=' dark:bg-slate-900'> */}
       <React.StrictMode>
         <AuthProvider>
           <RouterProvider router={router} />
           <ToastContainer />
         </AuthProvider>
       </React.StrictMode>
-    </div>
+    {/* </div> */}
   </Flowbite>
 )

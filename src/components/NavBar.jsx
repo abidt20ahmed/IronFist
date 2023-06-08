@@ -14,7 +14,8 @@ const NavBar = () => {
         logOut()
     }
     // bg - gradient - to - r from - cyan - 500 to - blue - 500
-
+    console.log(user);
+    console.log(user?.displayName, user?.photoURL);
     return (
 
         <nav className="bg-[#D01F26] text-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0  dark:border-gray-600">

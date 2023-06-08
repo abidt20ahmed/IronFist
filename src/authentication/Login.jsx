@@ -1,11 +1,12 @@
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { AuthContext } from '../context/AuthProvider';
 import app from '../firebase/firebase.config';
+import { useForm } from 'react-hook-form';
 
 
 const Login = () => {
@@ -13,34 +14,10 @@ const Login = () => {
     const provider = new GoogleAuthProvider();
     const auth = getAuth(app)
     const [password, setPassword] = useState('password')
-    if (password) {
 
-        console.log(password);
-    }
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location?.state?.from?.pathname || '/'
+
+
     console.log(from);
-
-    const handleLogin = event => {
-        event.preventDefault();
-        const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password);
-
-        signIn(email, password)
-            .then(result => {
-                const loggedUser = result.user
-                toast('Signed in Successfully')
-                navigate(from, { replace: true })
-
-            })
-            .catch(error => {
-                toast(error.message)
-            })
-
-    }
 
 
     const handleGoogleSignin = () => {
@@ -48,7 +25,6 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 toast('Signed in successfully')
-                // navigate(from, { replace: true })
 
                 console.log(result.user.photoURL);
 
@@ -63,10 +39,27 @@ const Login = () => {
         setPassword(type)
     }
 
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        signIn(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user
+                toast('Signed in Successfully')
+                navigate(from, { replace: true })
+
+            })
+            .catch(error => {
+                toast(error.message)
+            })
+
+    };
+
+
+
     return (
 
         <>
-            <form onSubmit={handleLogin} className="flex px-10 md:px-20 flex-col gap-4 mt-40 rounded-lg max-w-[500px] mx-auto bg-slate-200 pt-10 py-10">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex px-10 md:px-20 flex-col gap-4 mt-40 mb-20 rounded-lg max-w-[500px] mx-auto bg-slate-200 pt-10 py-10">
                 <h1 className=" text-4xl font-bold text-center pb-10 text-red-600">Login</h1>
                 <div className='flex justify-between items-center my-5 gap-10'>
 
@@ -91,6 +84,7 @@ const Login = () => {
                         id="email2"
                         type="email"
                         name='email'
+                        {...register("email", { required: true })}
                         placeholder="Email"
                         required={true}
                         shadow={true}
@@ -108,6 +102,7 @@ const Login = () => {
                             id="password2"
                             type={password}
                             name='password'
+                            {...register("password", { required: true })}
                             placeholder='******'
                             required={true}
                             shadow={true}

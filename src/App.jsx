@@ -4,6 +4,7 @@ import { DarkThemeToggle, Flowbite } from 'flowbite-react'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import Login from './authentication/Login'
+import Register from './authentication/Register'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,7 +12,7 @@ function App() {
   return (
     <Flowbite>
       <NavBar></NavBar>
-      <Login></Login>
+      <Register></Register>
 
 
       ...
