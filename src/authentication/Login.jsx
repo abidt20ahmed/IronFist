@@ -66,9 +66,19 @@ const Login = () => {
     return (
 
         <>
-            <form onSubmit={handleLogin} className="flex px-10 md:px-20 flex-col gap-4 mt-40 rounded-lg max-w-[500px] mx-auto bg-slate-200 pt-10 py-32 mb-20">
-                <h1 className=" text-4xl font-bold text-center pb-10 text-transparent bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text">Login</h1>
+            <form onSubmit={handleLogin} className="flex px-10 md:px-20 flex-col gap-4 mt-40 rounded-lg max-w-[500px] mx-auto bg-slate-200 pt-10 py-10">
+                <h1 className=" text-4xl font-bold text-center pb-10 text-red-600">Login</h1>
+                <div className='flex justify-between items-center my-5 gap-10'>
 
+                    <button onClick={handleGoogleSignin} className='border border-[#D01F26] w-full py-2 rounded-lg flex justify-center gap-3'>
+                        <FaGoogle className=' text-blue-600 mx-aut w-6 h-6 rounded-full py-0'></FaGoogle>Google
+                    </button>
+                    <button onClick={handleGoogleSignin} className='border border-[#D01F26] w-full py-2 rounded-lg flex justify-center gap-3'>
+                        <FaGoogle className=' text-blue-600 mx-aut w-6 h-6 rounded-full py-0'></FaGoogle>Google
+                    </button>
+
+
+                </div>
 
                 <div>
                     <div className="mb-2 block">
@@ -81,7 +91,7 @@ const Login = () => {
                         id="email2"
                         type="email"
                         name='email'
-                        placeholder="name@gmail.com"
+                        placeholder="Email"
                         required={true}
                         shadow={true}
                     />
@@ -120,19 +130,11 @@ const Login = () => {
                         </a>
                     </Label>
                 </div>
-                <Button gradientDuoTone="purpleToBlue" className='bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900' type="submit">
+                <Button className='bg-[#D01F26] hover:bg-[#AC2424]' type="submit">
                     Login
                 </Button>
-                <div className='flex justify-between items-end'>
 
-                    <Button outline={true} onClick={handleGoogleSignin} gradientDuoTone="purpleToBlue" className='bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900 w-20'>
-
-                        <FaGoogle className=' text-blue-600  w-6 h-6 bg-white rounded-full py-0'></FaGoogle>
-
-                    </Button>
-
-                    <small className='font-semibold text-right'>Not registered yet? <Link className=" text-blue-600 hover:underline dark:text-blue-500 font-semibold" to={'/register'}>Register</Link></small>
-                </div>
+                <small className='font-semibold text-center mt-5'>Not registered yet? <Link className=" text-blue-600 hover:underline dark:text-blue-500 font-semibold" to={'/register'}>Register</Link></small>
             </form>
         </>
     );
