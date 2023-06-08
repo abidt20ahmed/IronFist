@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaDribbble, FaFacebook, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import karate from '../../public/fist1.png';
 
 
 const Footer = () => {
@@ -12,11 +13,11 @@ const Footer = () => {
                 <div className="md:flex md:justify-between">
                     <div className="mb-6 md:mb-0">
                         <a href="#" className="flex items-center">
-                            <img src='' className="h-8 mr-3" alt="IronFist Logo" />
+                            <img src={karate} className=" text-white h-8 mr-3" alt="IronFist Logo" />
                             <span className="self-center text-2xl font-bold whitespace-nowrap text-gray-500 dark:text-white">Iron Fist</span>
                         </a>
                     </div>
-                    <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-6">
                         <div>
                             <h2 className="mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-white">Contact</h2>
                             <ul className="text-gray-600 dark:text-gray-400 font-medium">
