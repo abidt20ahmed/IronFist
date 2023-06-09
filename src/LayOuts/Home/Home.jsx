@@ -5,6 +5,8 @@ import Login from '../../authentication/Login';
 import Register from '../../authentication/Register';
 import { Link, Outlet } from 'react-router-dom';
 import { Avatar, Button, Card, Carousel } from 'flowbite-react';
+import Class from '../../components/Class';
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 const Home = () => {
     const sectionStyle = {
@@ -49,7 +51,38 @@ const Home = () => {
             </section>
 
 
-            <div className="h-56 sm:h-64 md:h-[500px] 2xl:h-[700px] mt-10 lg:mt-40 mb-5 lg:pb-24 max-w-7xl mx-auto overflow-hidden">
+            <section className=" bg-slate-200 mt-20">
+                <div className="">
+
+                    <div className="grid grid-cols-4 py-10 justify-center max-w-7xl mx-auto text-center">
+
+                        <div className="">
+                            <span className=" text-5xl font-bold text-red-600">130</span>
+                            <p className=' text-lg text-slate-800 font-semibold'>Students</p>
+                        </div>
+
+                        <div className="">
+                            <span className=" text-5xl font-bold text-red-600">16</span>
+                            <p className=' text-lg text-slate-800 font-semibold'>Courses</p>
+                        </div>
+
+                        <div className="">
+                            <span className=" text-5xl font-bold text-red-600">7</span>
+                            <p className=' text-lg text-slate-800 font-semibold'>Events</p>
+                        </div>
+
+                        <div className="">
+                            <span className=" text-5xl font-bold text-red-600">15</span>
+                            <p className=' text-lg text-slate-800 font-semibold'>Trainers</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <div className="h-56 sm:h-64 md:h-[500px] 2xl:h-[700px] mt-10 lg:mt-20 lg:pb-24 max-w-7xl mx-auto overflow-hidden">
                 <Carousel slideInterval={3000}>
                     <div className='relative'>
                         <img className='w-full object-cover rounded-lg brightness-50' src='https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb' alt="" />
@@ -73,109 +106,69 @@ const Home = () => {
                     </div>
                 </Carousel>
             </div >
+            <main className='max-w-7xl mx-auto'>
 
 
             <section id="popular-courses" className="mb-20">
                 <div className="container mx-auto" data-aos="fade-up">
 
-                    <div className="section-title">
-                        <h2>Courses</h2>
-                        <p>Popular Courses</p>
+                        <div className="section-title mb-20">
+                            <h2 className=' text-5xl font-bold'>Courses</h2>
+                            {/* <p>Popular Courses</p> */}
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto" data-aos="zoom-in" data-aos-delay="100">
 
-                        {/* <Card
-    className=' max-w-sm'
-    imgAlt="Meaningful alt text for an image that is not purely decorative"
-    imgSrc="https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb"
-    >
-    <div className='flex justify-between items-center'>
-    <p className=' bg-red-600 py-2 px-3'>Karate Kicks</p>
-    <p className=' font-semibold'>$15</p>
-    </div>
-    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-    <p>
-    Hook Kick
-    </p>
-    </h5>
-    <p className="font-normal text-gray-700 dark:text-gray-400">
-    <p>
-    A curved kick delivered by turning the body and striking the opponent with the heel or instep.
-    </p>
-    </p>
-    </Card>
-    <Card
-    className=' max-w-sm'
-    imgAlt="Meaningful alt text for an image that is not purely decorative"
-    imgSrc="https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb"
-    >
-    <div className='flex justify-between items-center'>
-    <p className=' bg-red-600 py-2 px-3'>Karate Striks</p>
-    <p className=' font-semibold'>$10</p>
-    </div>
-    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-    <p>
-    Hammer Fist
-    </p>
-    </h5>
-    <p className="font-normal text-gray-700 dark:text-gray-400">
-    <p>
-    A strike made by tightly clenching the hand and delivering a downward strike, usually targeting the opponent's head, collarbone, or back.
-    </p>
-    </p>
-</Card>*/}
-                        <Card
-                            className=' max-w-sm'
-                            imgAlt="Meaningful alt text for an image that is not purely decorative"
-                            imgSrc="https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb"
-                        >
-                            <div className='flex justify-between items-center'>
-                                <p className=' bg-red-600 py-2 px-3'>Karate Kicks</p>
-                                <p className=' font-semibold'>$17</p>
-                            </div>
-                            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                <p>
-                                    Crescent Kick
-                                </p>
-                            </h5>
-                            <p className="font-normal text-gray-700 dark:text-gray-400">
-                                <p>
-                                    A sweeping kick that follows an arcing trajectory, targeting the opponent's head or neck.
-                                </p>
-                            </p>
-                        </Card>
 
 
 
-                        <div className="max-w-md bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700 group overflow-hidden">
-                            <a href="#">
-                                <img className="rounded-t-lg group-hover:scale-110 overflow-hidden transition  object-cover" src="https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb" alt="" />
-                            </a>
-                            <div className="p-5 py-">
-                                <div className='flex justify-between items-center py-3'>
-                                    <p className=' bg-red-600 py-2 px-3'>Karate Kicks</p>
-                                    <p className=' font-semibold'>$17</p>
-                                </div>
-                                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
-                                    <p>
-                                        Crescent Kick
-                                    </p>
-                                </h5>
-                                <p className="font-normal text-gray-700 dark:text-gray-400">
-                                    <p>
-                                        A sweeping kick that follows an arcing trajectory, targeting the opponent's head or neck.
-                                    </p>
-                                </p>
-                            </div>
-                            <hr className='mx-5' />
-                            <div className='flex justify-between items-center p-5'>
-                                <img className="h-16 w-16 rounded-full object-cover" src="https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb" alt="" />
-                                <p className=' font-semibold'>$17</p>
-                            </div>
+                            <Class img={'https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb'} name={'Karate Kicks'} rate={17} title={'Crescent Kick'} description={"A sweeping kick that follows an arcing trajectory, targeting the opponent's head or neck."} />
+                            <Class img={'https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb'} name={'Karate Kicks'} rate={17} title={'Crescent Kick'} description={"A sweeping kick that follows an arcing trajectory, targeting the opponent's head or neck."} />
+                            <Class img={'https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb'} name={'Karate Kicks'} rate={17} title={'Crescent Kick'} description={"A sweeping kick that follows an arcing trajectory, targeting the opponent's head or neck."} />
+                            <Class img={'https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb'} name={'Karate Kicks'} rate={17} title={'Crescent Kick'} description={"A sweeping kick that follows an arcing trajectory, targeting the opponent's head or neck."} />
+                            <Class img={'https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb'} name={'Karate Kicks'} rate={17} title={'Crescent Kick'} description={"A sweeping kick that follows an arcing trajectory, targeting the opponent's head or neck."} />
+                            <Class img={'https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb'} name={'Karate Kicks'} rate={17} title={'Crescent Kick'} description={"A sweeping kick that follows an arcing trajectory, targeting the opponent's head or neck."} />
+
+
+
                         </div>
 
+                    </div>
+                </section>
+                <section id="popular-courses" className="mb-20">
+                    <div className="container mx-auto" data-aos="fade-up">
 
+                        <div className="section-title mb-20">
+                            <h2 className=' text-5xl font-bold'>Instractors</h2>
+                            {/* <p>Popular Courses</p> */}
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto" data-aos="zoom-in" data-aos-delay="100">
+
+                            <div className="max-w-md bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700 group overflow-hidden">
+                                <a href="#">
+                                    <img className="rounded-t-md group-hover:scale-110 overflow-hidden transition  object-cover" src="https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb" alt="" />
+                                </a>
+                                <div className="p-5 py-">
+                                    <div className=' text-center py-2 px-5'>
+                                        <img className="h-16 w-16 mx-auto rounded-full object-cover" src="https://img.freepik.com/free-photo/red-fiat-500e-is-black-background_1340-37121.jpg?w=1380&t=st=1684505992~exp=1684506592~hmac=6813cea782291a8ce0edc6f7776b1ca5a1c113bd5141f5865d1a71917d38facb" alt="" />
+                                        <p className=' text-2xl text-slate-800 font-semibold'>Instractor Name</p>
+                                        <p className=' text-md text-slate-800 font-semibold'>Class Name</p>
+                                    </div>
+
+
+                                    <p className="font-normal text-gray-700 text-center dark:text-gray-400">
+
+                                        A sweeping kick that follows an arcing trajectory, targeting the opponent's head or neck.
+
+                                    </p>
+                                    <div className='flex justify-center m-4 gap-4'>
+                                        <FaTwitter className=' text-2xl text-red-900 hover:text-red-600' /> <FaFacebook className=' text-2xl text-red-900 hover:text-red-600' /> <FaInstagram className=' text-2xl text-red-900 hover:text-red-600' /> <FaLinkedin className=' text-2xl text-red-900 hover:text-red-600' />
+                                    </div>
+                                </div>
+
+
+                            </div>
 
                     </div>
 
@@ -185,6 +178,7 @@ const Home = () => {
 
             <Outlet></Outlet>
 
+            </main>
             <Footer />
         </div>
     );

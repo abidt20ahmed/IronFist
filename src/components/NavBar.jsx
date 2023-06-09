@@ -58,13 +58,13 @@ const NavBar = () => {
                             <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Home</NavLink>
+                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Instructors</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Home</NavLink>
+                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Classes</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Home</NavLink>
+                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Dashboard</NavLink>
                         </li>
                     </ul>
                 </div>
