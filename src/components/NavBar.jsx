@@ -19,9 +19,9 @@ const NavBar = () => {
     return (
 
         <nav className="bg-[#D01F26] text-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0  dark:border-gray-600">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2">
                 <div className='flex gap-1'>
-                    <img className='hidden md:block h-9 text-black' title='Iron Fist' src={karate} /><span className="self-center text-2xl font-bold whitespace-nowrap dark:text-white">Iron Fist</span>
+                    <img className='hidden md:block h-12 text-black' title='Iron Fist' src={karate} /><span className="self-center text-2xl font-bold whitespace-nowrap dark:text-white">Iron Fist</span>
                 </div>
 
 
@@ -40,7 +40,7 @@ const NavBar = () => {
 
                         {
                             auth.currentUser ?
-                                <button onClick={handleLogOut} type="button" className="text-white bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
+                                <button onClick={handleLogOut} type="button" className="text-white bg-slate-700 hover:bg-slate-600  font-medium rounded-lg text-sm px-4 py-2 text-center lg:mr-3 md:mr-0 dark:bg-[#D01F26] dark:hover:bg-[#AC2424]">Logout</button>
                                 :
                                 <button type="button" className="text-white bg-slate-700 hover:bg-slate-600  font-medium rounded-lg text-sm px-4 py-2 text-center lg:mr-3 md:mr-0 dark:bg-[#D01F26] dark:hover:bg-[#AC2424]"><Link to='/login'>Login</Link></button>
                         }

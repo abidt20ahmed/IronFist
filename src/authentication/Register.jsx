@@ -1,20 +1,24 @@
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import React, { useContext, useEffect, useState } from 'react';
-import { getAuth, updateProfile } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { GoogleAuthProvider, getAuth, signInWithPopup, updateProfile } from 'firebase/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../context/AuthProvider';
 import app from '../firebase/firebase.config';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 
 const Register = () => {
     const { createUser, logOut } = useContext(AuthContext)
+    const navigate = useNavigate();
     const [password, setPassword] = useState('password')
     const [confirm, setConfirm] = useState('password')
     const [errorText, setErrorText] = useState('')
     const auth = getAuth(app)
+    const provider = new GoogleAuthProvider();
 
 
 
@@ -26,15 +30,31 @@ const Register = () => {
     }
 
 
+    const handleGoogleSignin = () => {
+
+        signInWithPopup(auth, provider)
+            .then(result => {
+                const user = result.user;
+                toast('Signed in successfully')
+                // navigate(from, { replace: true })
+
+                console.log(result.user.photoURL);
+
+            })
+            .catch(error => {
+                toast(`${error.message}`)
+            })
+    }
+
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async data => {
         await createUser(data.email, data.password)
             .then(result => {
                 const createdUser = result.user
-                console.log(data.email, data.password);
-                logOut()
                 toast('successfully registered. Login now!')
-
+                // logOut()
+                // navigate('/login')
             })
             .catch(error => {
                 console.log(`${error.message}`)
@@ -54,14 +74,19 @@ const Register = () => {
 
     useEffect(() => {
         setErrorText(errors.password?.type)
-
     }, [errors, errorText])
 
     return (
         <>
-
+            <NavBar />
             <form onSubmit={handleSubmit(onSubmit)} className="flex px-10 md:px-20 flex-col gap-4 my-24 rounded-xl max-w-screen-sm mx-auto bg-slate-100 mt-40 py-10">
                 <h1 className=" text-4xl font-bold text-center pb-10 text-red-600">Register</h1>
+
+                <button onClick={handleGoogleSignin} className='border border-[#D01F26] w-ful py-2 rounded-lg flex justify-center gap-3'>
+                    <FaGoogle className=' text-blue-600 w-6 h-6 rounded-full py-0'></FaGoogle>Sign up with Google
+                </button>
+
+
                 <div>
                     <div className="mb-2 block">
                         <Label
@@ -194,7 +219,7 @@ const Register = () => {
 
                 <small className='font-semibold'>Already have an account? <Link className=' text-blue-600 hover:underline dark:text-blue-500 font-semibold' to={'/login'}>Login</Link></small>
             </form>
-
+            <Footer />
         </>
     );
 };

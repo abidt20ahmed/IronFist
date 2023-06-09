@@ -7,6 +7,8 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { AuthContext } from '../context/AuthProvider';
 import app from '../firebase/firebase.config';
 import { useForm } from 'react-hook-form';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 
 const Login = () => {
@@ -14,9 +16,12 @@ const Login = () => {
     const provider = new GoogleAuthProvider();
     const auth = getAuth(app)
     const [password, setPassword] = useState('password')
+    const [formData, setFormData] = useState({})
 
 
-
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/'
     console.log(from);
 
 
@@ -25,6 +30,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 toast('Signed in successfully')
+                // navigate(from, { replace: true })
 
                 console.log(result.user.photoURL);
 
@@ -59,6 +65,7 @@ const Login = () => {
     return (
 
         <>
+            <NavBar />
             <form onSubmit={handleSubmit(onSubmit)} className="flex px-10 md:px-20 flex-col gap-4 mt-40 mb-20 rounded-lg max-w-[500px] mx-auto bg-slate-200 pt-10 py-10">
                 <h1 className=" text-4xl font-bold text-center pb-10 text-red-600">Login</h1>
                 <div className='flex justify-between items-center my-5 gap-10'>
@@ -107,8 +114,8 @@ const Login = () => {
                             required={true}
                             shadow={true}
                         />
-                        <FaEye onClick={() => handlePassword('text')} className={`absolute text-2xl top-1/4 right-3 ${password === 'password' ? 'block' : 'hidden'}`} />
-                        <FaEyeSlash onClick={() => handlePassword('password')} className={`absolute text-2xl top-1/4 right-3 ${password === 'password' ? 'hidden' : 'block'}`} />
+                        <FaEye onClick={() => handlePassword('text')} className={`absolute text-2xl text-gray-500 top-1/4 right-3 ${password === 'password' ? 'block' : 'hidden'}`} />
+                        <FaEyeSlash onClick={() => handlePassword('password')} className={`absolute text-2xl text-gray-500 top-1/4 right-3 ${password === 'password' ? 'hidden' : 'block'}`} />
                     </div>
 
                 </div>
@@ -125,12 +132,13 @@ const Login = () => {
                         </a>
                     </Label>
                 </div>
-                <Button className='bg-[#D01F26] hover:bg-[#AC2424]' type="submit">
+                <Button className='bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800' type="submit">
                     Login
                 </Button>
 
                 <small className='font-semibold text-center mt-5'>Not registered yet? <Link className=" text-blue-600 hover:underline dark:text-blue-500 font-semibold" to={'/register'}>Register</Link></small>
             </form>
+            <Footer />
         </>
     );
 };
