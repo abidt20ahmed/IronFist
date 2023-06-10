@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [avatar, setAvatar] = useState('')
     const [name, setName] = useState('')
+    const [role, setRole] = useState('')
 
 
 
@@ -59,6 +60,8 @@ const AuthProvider = ({ children }) => {
         createUser,
         signIn,
         logOut,
+        role,
+        setRole,
         auth
     }
 

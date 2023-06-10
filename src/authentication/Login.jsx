@@ -30,7 +30,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 toast('Signed in successfully')
-                // navigate(from, { replace: true })
+                navigate(from, { replace: true })
 
                 console.log(result.user.photoURL);
 

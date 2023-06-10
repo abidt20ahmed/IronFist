@@ -1,7 +1,7 @@
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import React, { useContext, useEffect, useState } from 'react';
 import { GoogleAuthProvider, getAuth, signInWithPopup, updateProfile } from 'firebase/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../context/AuthProvider';
 import app from '../firebase/firebase.config';
@@ -9,16 +9,35 @@ import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import RoleModal from '../components/RoleModal';
 
 
 const Register = () => {
-    const { createUser, logOut } = useContext(AuthContext)
+    const { createUser, logOut, role, user } = useContext(AuthContext)
+    const email = user?.email;
+    const data = {
+        role: role,
+        email
+    };
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/'
     const [password, setPassword] = useState('password')
     const [confirm, setConfirm] = useState('password')
     const [errorText, setErrorText] = useState('')
     const auth = getAuth(app)
     const provider = new GoogleAuthProvider();
+    let [isOpen, setIsOpen] = useState(true)
+    console.log(role);
+    const classes = useLoaderData()
+    console.log(classes[0].email);
+    const closeModal = () => {
+        setIsOpen(false)
+    }
+
+    const openModal = () => {
+        setIsOpen(true)
+    }
 
 
 
@@ -31,18 +50,35 @@ const Register = () => {
 
 
     const handleGoogleSignin = () => {
-
+        console.log(role);
         signInWithPopup(auth, provider)
             .then(result => {
                 const user = result.user;
                 toast('Signed in successfully')
-                // navigate(from, { replace: true })
+                navigate(from, { replace: true })
+
+                fetch('http://localhost:5000/postRoles', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                })
+                    .then(res => res.json())
+                    .then(result => {
+                        console.log(result);
+                        navigate('/classes')
+                        toast('Toy Posted Successfully')
+                    })
+                    .catch(error => {
+                        console.log('Error:', error);
+                    });
+                // setIsOpen(true)
 
                 console.log(result.user.photoURL);
 
             })
             .catch(error => {
                 toast(`${error.message}`)
+                console.log(error);
             })
     }
 
@@ -53,8 +89,23 @@ const Register = () => {
             .then(result => {
                 const createdUser = result.user
                 toast('successfully registered. Login now!')
-                // logOut()
-                // navigate('/login')
+                fetch(`http://localhost:5000/updateClass/${classes._id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ data })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.modifiedCount > 0) {
+                            toast('Toys Updated Successfully')
+                            // navigate('/myToys')
+                        }
+
+                    })
+                // setIsOpen(true)
+                logOut()
+                navigate('/login')
             })
             .catch(error => {
                 console.log(`${error.message}`)
@@ -79,6 +130,19 @@ const Register = () => {
     return (
         <>
             <NavBar />
+
+            <RoleModal isOpen={isOpen} closeModal={closeModal} />
+            {/* <div className="fixed inset-0 flex items-center justify-center">
+                <button
+                    type="button"
+                    onClick={openModal}
+                    className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                >
+                    Open dialog
+                </button>
+            </div> */}
+
+
             <form onSubmit={handleSubmit(onSubmit)} className="flex px-10 md:px-20 flex-col gap-4 my-24 rounded-xl max-w-screen-sm mx-auto bg-slate-100 mt-40 py-10">
                 <h1 className=" text-4xl font-bold text-center pb-10 text-red-600">Register</h1>
 

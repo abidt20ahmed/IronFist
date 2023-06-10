@@ -14,14 +14,13 @@ const NavBar = () => {
         logOut()
     }
     // bg - gradient - to - r from - cyan - 500 to - blue - 500
-    console.log(user);
-    console.log(user?.displayName, user?.photoURL);
+    // console.log(user);
     return (
 
-        <nav className="bg-[#D01F26] text-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0  dark:border-gray-600">
+        <nav className="bg-[#D01F26] text-white dark:bg-slate-800 fixed w-full z-20 top-0 left-0  dark:border-gray-600">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2">
                 <div className='flex gap-1'>
-                    <img className='hidden md:block h-12 text-black' title='Iron Fist' src={karate} /><span className="self-center text-2xl font-bold whitespace-nowrap dark:text-white">Iron Fist</span>
+                    <img className='hidden md:block h-12 dark:bg-white rounded-full' title='Iron Fist' src={karate} /><span className="self-center text-2xl font-bold whitespace-nowrap dark:text-white">Iron Fist</span>
                 </div>
 
 
@@ -53,18 +52,18 @@ const NavBar = () => {
 
                 </div>
                 <div className={`items-center justify-between ${hidden ? 'hidden' : ''} w-full md:flex md:w-auto md:order-1`} id="navbar-sticky">
-                    <ul className="flex flex-col p-4 text-right md:p-0 mt-4 font-medium rounded-lg bg-a-500 md:flex-row md:space-x-8 md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <ul className="flex flex-col p-4 text-right md:p-0 mt-4 font-medium rounded-lg bg-a-500 md:flex-row md:space-x-8 md:mt-0 md:border-0  dark:bg-slate-700 md:dark:bg-slate-800 dark:border-gray-700">
                         <li>
-                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Home</NavLink>
+                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Instructors</NavLink>
+                            <NavLink to="/instructors" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Instructors</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Classes</NavLink>
+                            <NavLink to="/classes" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Classes</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-white drop-shadow-lg' : 'hover:text-gray-200')} aria-current="page">Dashboard</NavLink>
+                            <NavLink to="/dashboard" className={({ isActive }) => (isActive ? ' text-slate-900 drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Dashboard</NavLink>
                         </li>
                     </ul>
                 </div>
