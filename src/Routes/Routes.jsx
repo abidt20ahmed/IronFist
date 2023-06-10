@@ -9,6 +9,9 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import Classes from "../pages/Classes/Classes";
 import AddClass from "../pages/AddClass/AddClass";
 import PrivateRoute from "./PrivateRoute";
+import DashboardMenu from "../components/DashboardMenu";
+import ManageClasses from "../components/ManageClasses";
+import ManageUsers from "../components/ManageUsers";
 
 const router = createBrowserRouter([
     {
@@ -41,13 +44,27 @@ const router = createBrowserRouter([
         element: <Classes />
     },
     {
-        path: '/dashboard',
-        element: <PrivateRoute><Dashboard /></PrivateRoute>,
-        // loader: () => fetch('http://localhost:5000/classes')
-    },
-    {
         path: '/addClass',
         element: <AddClass />
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
+        children: [
+            {
+                path: '/',
+                element: <DashboardMenu />
+            },
+            {
+                path: '/manageClasses',
+                element: <ManageClasses />
+            },
+            {
+                path: '/manageUsers',
+                element: <ManageUsers />
+            }
+        ]
+        // loader: () => fetch('http://localhost:5000/classes')
     },
 ]);
 
