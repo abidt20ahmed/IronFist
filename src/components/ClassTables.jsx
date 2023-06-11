@@ -7,14 +7,18 @@ import useAuth from '../hooks/useAuth';
 import { toast } from 'react-toastify';
 import RoleModal from './RoleModal';
 import FeedbackModal from './FeedbackModal';
+import InstructorClassList from './InstructorClassList';
+import Feedback from './Feedback';
 
 const ClassTables = () => {
     const { user } = useAuth();
     const [classes, setClasses] = useState([])
     const [reload, setReload] = useState(true)
+    const [role, setRole] = useState('')
     const [feedbackId, setFeedbackId] = useState('')
+    const [feedback, setFeedback] = useState('')
 
-    console.log(reload);
+    // console.log(reload);
     // useEffect(() => {
     //     fetch(`http://localhost:5000/myClasses/${user?.email}`)
     //         .then(res => res.json())
@@ -23,13 +27,35 @@ const ClassTables = () => {
     //         });
     // }, [user?.email])
 
+    console.log(role === 'Admin');
+    useEffect(() => {
+        console.log(user.email);
+        fetch(`http://localhost:5000/role/email/${user.email}`)
+            .then(res => res.json())
+            .then(data => setRole(data.role))
+    }, [user.email])
+    // console.log(role);
+
+
+    useEffect(() => {
+
+        fetch(`http://localhost:5000/myClasses/${user.email}`)
+            .then(res => res.json())
+            .then(data => setClasses(data))
+    }, [user.email])
+
+
     useEffect(() => {
         fetch(`http://localhost:5000/classes`)
             .then(res => res.json())
             .then(data => {
+                if (role === 'Admin') {
                 setClasses(data)
+                }
             });
-    }, [user?.email], reload)
+    }, [user?.email, role])
+
+
 
     const handleRoles = (id) => {
         fetch(`http://localhost:5000/roles/${id}`, {
@@ -52,7 +78,9 @@ const ClassTables = () => {
 
     const openModal = (id) => {
         console.log(id);
-        setFeedbackId(id)
+        { role === 'Admin' && setFeedbackId(id) }
+        setFeedback(id)
+
         setIsOpen(true)
     }
 
@@ -83,26 +111,49 @@ const ClassTables = () => {
                         <Table.HeadCell>
                             Available Seats
                         </Table.HeadCell>
+                        {role === 'Admin' && 
                         <Table.HeadCell>
                             Price
-                        </Table.HeadCell>
+                            </Table.HeadCell>}
+                        {role === 'Instructor' &&
+                            <Table.HeadCell>
+                                Enrolled
+                            </Table.HeadCell>}
                         <Table.HeadCell className="pl-16">
                             Status
                         </Table.HeadCell>
-                        <Table.HeadCell className="!pl-">
+                        {role === 'Admin' && 
+                            <Table.HeadCell className="!pl-">
                             Approve
-                        </Table.HeadCell>
-                        <Table.HeadCell className="!pl-">
+                            </Table.HeadCell>}
+                        {role === 'Instructor' &&
+                            <Table.HeadCell className="!pl-">
+                                Feedback
+                            </Table.HeadCell>}
+                        {role === 'Admin' &&
+                            <Table.HeadCell className="!pl-">
                             Deny
-                        </Table.HeadCell>
+                            </Table.HeadCell>}
+                        {role === 'Instructor' &&
+                            <Table.HeadCell className="!pl-">
+                                Update
+                            </Table.HeadCell>}
+                        {role === 'Admin' && 
                         <Table.HeadCell className="!pl-">
                             Feedback
-                        </Table.HeadCell>
+                            </Table.HeadCell>}
                     </Table.Head>
-                    <Table.Body className="divide-y">
+                    <Table.Body className={`divide-y ${role !== 'Admin' && 'hidden'}`} >
 
                         {
                             classes.map((classData, index) => <ClassList key={classData._id} openModal={openModal} reload={reload} setReload={setReload} classData={classData} index={index} ></ClassList>)
+                        }
+
+                    </Table.Body>
+                    <Table.Body className={`divide-y ${role !== 'Instructor' && 'hidden'}`} >
+
+                        {
+                            classes.map((classData, index) => <InstructorClassList key={classData._id} openModal={openModal} reload={reload} setReload={setReload} classData={classData} index={index} ></InstructorClassList>)
                         }
 
                     </Table.Body>
@@ -117,7 +168,11 @@ const ClassTables = () => {
                 }
 
             </div>
-            <FeedbackModal feedbackId={feedbackId} isOpen={isOpen} closeModal={closeModal} />
+            {role === 'Admin' && <FeedbackModal feedbackId={feedbackId} isOpen={isOpen} closeModal={closeModal} />}
+            {role === 'Instructor' &&
+                <Feedback feedback={feedback} feedbackId={feedbackId} isOpen={isOpen} openModal={openModal} closeModal={closeModal} />
+            }
+
         </div>
     );
 };

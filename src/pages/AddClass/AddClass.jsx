@@ -81,10 +81,10 @@ const AddClass = () => {
             {/* <NavBar></NavBar> */}
 
 
-            <section className="bg-slte-100 dark:bg-gray-900 my-10">
+            <section className="bg-slte-100 dark:bg-gray-900 my-10 sm:ml-64">
                 <div className="py-8 px-10 mx-auto max-w-5xl lg:py-16 bg-slate-100 dark:bg-slate-800 rounded-xl">
                     {/* <h2 className=' text-center text-red-500 mb-10 text-5xl font-bold'>Add Class</h2> */}
-                    <h2 className="mb-10 text-xl font-bold text-gray-900 dark:text-white">Add a new class</h2>
+                    <h2 className="mb-10 text-2xl font-bold text-red-700 dark:text-white">Add a new class</h2>
                     <form className='' onSubmit={handleAddClass}>
                         <div className="grid gap-4 sm:grid-cols-3 sm:gap-6">
                             <div className="sm:col-span-3">
@@ -139,7 +139,7 @@ const AddClass = () => {
                                 <Label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</Label>
                                 <textarea id="description" rows="5" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Class description here"></textarea>
                             </div>
-                            <button type="submit" className=" text-white text-lg font-semibold bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800 py-3 rounded-md">
+                            <button type="submit" className=" text-white text-lg font-semibold bg-red-700 hover:bg-red-800 dark:bg-red-700 dark:hover:bg-red-800 py-3 rounded-md">
                                 Add Now
                             </button>
                         </div>

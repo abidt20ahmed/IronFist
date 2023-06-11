@@ -88,7 +88,7 @@ const Dashboard = () => {
 
 
             <aside id="logo-sidebar" className={`fixed top-0 left-0 z-40 w-64 h-screen  ${close && 'transition-transform -translate-x-full'} sm:translate-x-0`} aria-label="Sidebar">
-                <div className="h-full px-3 py-4 overflow-y-auto bg-red-600 dark:bg-slate-950">
+                <div className="h-full px-3 py-4 overflow-y-auto bg-red-700 dark:bg-slate-950">
                     <a href="#" className="flex items-center pl-2.5 mb-5">
                         <img src={Fist} className="h-10 mr-1 dark:bg-gray-300 rounded-full" alt="Iron Fist Logo" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-gray-400">Iron Fist</span>
@@ -105,18 +105,26 @@ const Dashboard = () => {
                                 <svg aria-hidden="true" className="w-6 h-6  transition duration-75 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
                                 <span className="ml-3">Dashboard</span>
                             </NavLink>
-                        </li>                
-                        <li>
-                            {role === "Admin" && <NavLink to='/dashboard/manageClasses' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                        </li>
+                        {role === "Admin" || role === 'Instructor' && <li>
+                            <NavLink to='/dashboard/manageClasses' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <FaRegEdit className='w-6 h-6 transition duration-75' />
                                 <span className="flex-1 ml-3 whitespace-nowrap ">Manage Classes</span>
-                            </NavLink>}
+                            </NavLink>
+                        </li>}
+                        {role === "Admin" && <li>
+                            <NavLink to='/dashboard/manageClasses' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                                <FaRegEdit className='w-6 h-6 transition duration-75' />
+                                <span className="flex-1 ml-3 whitespace-nowrap ">My Classes</span>
+                            </NavLink>
+                        </li>}
 
-                            {role === "Admin" && <NavLink to='/dashboard/addClass' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                        {role === "Admin" && <li>
+                            <NavLink to='/dashboard/addClass' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <BiAddToQueue className='w-6 h-6 transition duration-75' />
                                 <span className="flex-1 ml-3 whitespace-nowrap ">Add a Class</span>
-                            </NavLink>}
-                        </li>
+                            </NavLink>
+                        </li>}
                         <li>
                             <NavLink to='/dashboard/manageUsers' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <FaUsers className='w-6 h-6 transition duration-75 ' />
