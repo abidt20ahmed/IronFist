@@ -41,7 +41,7 @@ const AddClass = () => {
             linkedIn,
             description,
             date,
-            state: 'pending',
+            status: 'pending',
             instructorName,
             instructorImage,
             instructorPhoto,

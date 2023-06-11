@@ -31,6 +31,7 @@ const Register = () => {
     console.log(role);
     const classes = useLoaderData()
     console.log(classes[0].email);
+
     const closeModal = () => {
         setIsOpen(false)
     }

@@ -1,13 +1,67 @@
 import { Button, Table } from 'flowbite-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ClassList from './ClassList';
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
+import useAuth from '../hooks/useAuth';
+import { toast } from 'react-toastify';
+import RoleModal from './RoleModal';
+import FeedbackModal from './FeedbackModal';
 
-const ClassTables = ({ classes }) => {
+const ClassTables = () => {
+    const { user } = useAuth();
+    const [classes, setClasses] = useState([])
+    const [reload, setReload] = useState(true)
+    const [feedbackId, setFeedbackId] = useState('')
+
+    console.log(reload);
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/myClasses/${user?.email}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setClasses(data)
+    //         });
+    // }, [user?.email])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/classes`)
+            .then(res => res.json())
+            .then(data => {
+                setClasses(data)
+            });
+    }, [user?.email], reload)
+
+    const handleRoles = (id) => {
+        fetch(`http://localhost:5000/roles/${id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modidiedCount) {
+                    toast('User Role Updated')
+                }
+            })
+    }
+
+
+    let [isOpen, setIsOpen] = useState(false)
+    const closeModal = () => {
+        setIsOpen(false)
+    }
+
+    const openModal = (id) => {
+        console.log(id);
+        setFeedbackId(id)
+        setIsOpen(true)
+    }
+
+
+
     return (
         <div className='flex flex-col mx-auto mb-20 p-4 sm:ml-64' >
             <div className=' flex-grow relative overflow-x-auto'>
+
 
                 {/* Class Image, Class name, Instructor name, Instructor email,
                  Available seats, Price, Status(pending/approved/denied) 3 buttons( Approve, Deny and send feedback */}
@@ -32,7 +86,7 @@ const ClassTables = ({ classes }) => {
                         <Table.HeadCell>
                             Price
                         </Table.HeadCell>
-                        <Table.HeadCell className="!pl-">
+                        <Table.HeadCell className="pl-16">
                             Status
                         </Table.HeadCell>
                         <Table.HeadCell className="!pl-">
@@ -48,7 +102,7 @@ const ClassTables = ({ classes }) => {
                     <Table.Body className="divide-y">
 
                         {
-                            classes.map((classData, index) => <ClassList key={classData._id} classData={classData} index={index} ></ClassList>)
+                            classes.map((classData, index) => <ClassList key={classData._id} openModal={openModal} reload={reload} setReload={setReload} classData={classData} index={index} ></ClassList>)
                         }
 
                     </Table.Body>
@@ -63,6 +117,7 @@ const ClassTables = ({ classes }) => {
                 }
 
             </div>
+            <FeedbackModal feedbackId={feedbackId} isOpen={isOpen} closeModal={closeModal} />
         </div>
     );
 };
