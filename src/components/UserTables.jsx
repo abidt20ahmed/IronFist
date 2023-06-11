@@ -1,20 +1,20 @@
 import { Button, Table } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
-import ClassList from './ClassList';
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
 import useAuth from '../hooks/useAuth';
 import { toast } from 'react-toastify';
-import RoleModal from './RoleModal';
 import FeedbackModal from './FeedbackModal';
+import UserList from './UserList';
 
-const ClassTables = () => {
-    const { user } = useAuth();
-    const [classes, setClasses] = useState([])
+
+const UserTables = () => {
+    const { user, loading } = useAuth();
+    const [users, setUsers] = useState([])
     const [reload, setReload] = useState(true)
     const [feedbackId, setFeedbackId] = useState('')
 
-    console.log(reload);
+    console.log(users);
     // useEffect(() => {
     //     fetch(`http://localhost:5000/myClasses/${user?.email}`)
     //         .then(res => res.json())
@@ -23,26 +23,33 @@ const ClassTables = () => {
     //         });
     // }, [user?.email])
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/classes`)
-            .then(res => res.json())
-            .then(data => {
-                setClasses(data)
-            });
-    }, [user?.email], reload)
-
-    const handleRoles = (id) => {
-        fetch(`http://localhost:5000/roles/${id}`, {
+    const makeAdmin = (email, role, name) => {
+        console.log('Clicked');
+        console.log(email);
+        fetch(`http://localhost:5000/${role}/roles/${email}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if (data.modidiedCount) {
-                    toast('User Role Updated')
+                if (data.modifiedCount) {
+                    toast(`${name} is now ${role}`)
                 }
             })
     }
+
+
+
+    //! user data
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/roles`)
+            .then(res => res.json())
+            .then(data => {
+                setUsers(data)
+            });
+    }, [user?.email, reload])
+
 
 
     let [isOpen, setIsOpen] = useState(false)
@@ -63,55 +70,41 @@ const ClassTables = () => {
             <div className=' flex-grow relative overflow-x-auto'>
 
 
-                {/* Class Image, Class name, Instructor name, Instructor email,
-                 Available seats, Price, Status(pending/approved/denied) 3 buttons( Approve, Deny and send feedback */}
 
                 <Table className=' overflow-x-scrol' hoverable={true}>
                     <Table.Head>
-                        <Table.HeadCell className='!pl-20'>
+                        <Table.HeadCell className='!pl-8'>
                             PICTURE
                         </Table.HeadCell>
-                        <Table.HeadCell>
-                            Class Name
-                        </Table.HeadCell>
-                        <Table.HeadCell>
+                        <Table.HeadCell className=''>
                             Instructor
                         </Table.HeadCell>
                         <Table.HeadCell className="!pl-16">
                             Instructor Email
                         </Table.HeadCell>
-                        <Table.HeadCell>
-                            Available Seats
-                        </Table.HeadCell>
-                        <Table.HeadCell>
-                            Price
-                        </Table.HeadCell>
-                        <Table.HeadCell className="pl-16">
-                            Status
+                        <Table.HeadCell className="!pl-">
+                            Role
                         </Table.HeadCell>
                         <Table.HeadCell className="!pl-">
-                            Approve
+                            Make Admin
                         </Table.HeadCell>
                         <Table.HeadCell className="!pl-">
-                            Deny
-                        </Table.HeadCell>
-                        <Table.HeadCell className="!pl-">
-                            Feedback
+                            Make Instructor
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
 
                         {
-                            classes.map((classData, index) => <ClassList key={classData._id} openModal={openModal} reload={reload} setReload={setReload} classData={classData} index={index} ></ClassList>)
+                            users.map((userData, index) => <UserList key={userData._id} makeAdmin={makeAdmin} openModal={openModal} reload={reload} setReload={setReload} userData={userData} index={index} ></UserList>)
                         }
 
                     </Table.Body>
                 </Table>
 
                 {
-                    classes.length < 1 &&
+                    users.length < 1 && !loading &&
                     <>
-                        <h1 className='text-xl md:text-6xl text-gray-600 font-semibold my-40 text-center md:mt-60'>There is no Classes added</h1>
+                        <h1 className='text-xl md:text-6xl text-gray-600 font-semibold my-40 text-center md:mt-60'>There is no Users Registered</h1>
                         <div className='flex justify-center'><Link to={'/addClass'}><Button gradientDuoTone="purpleToBlue" className='bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900'>Add now<FaArrowRight className=' w-5 h-5 ml-2 pt-1' /></Button></Link></div>
                     </>
                 }
@@ -122,4 +115,4 @@ const ClassTables = () => {
     );
 };
 
-export default ClassTables;
+export default UserTables;

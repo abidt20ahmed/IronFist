@@ -1,9 +1,10 @@
 import React from 'react';
+import UserTables from './UserTables';
 
 const ManageUsers = () => {
     return (
         <div>
-            manage Users
+            <UserTables />
         </div>
     );
 };

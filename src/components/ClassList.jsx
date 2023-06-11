@@ -54,10 +54,10 @@ const ClassList = ({ classData, setReload, reload, openModal }) => {
                     <div></div>
             </Table.Cell>
             <Table.Cell>
-                    <button onClick={() => handleStatus(_id, "Approved")} className=' text-white font-bold bg-red-600 p-2 rounded-md' disabled={status === 'Approved' || status === 'Denied'}>Approve</button>
+                    <button onClick={() => handleStatus(_id, "Approved")} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-200' disabled={status === 'Approved' || status === 'Denied'}>Approve</button>
                 </Table.Cell>
                 <Table.Cell>
-                    <button onClick={() => handleStatus(_id, "Denied")} className=' text-white font-bold bg-red-600 disabled p-2 px-3 rounded-md' disabled={status === 'Approved' || status === 'Denied'}>Deny</button>
+                    <button onClick={() => handleStatus(_id, "Denied")} className=' text-white font-bold bg-red-600 disabled p-2 px-3 rounded-md disabled:bg-gray-200' disabled={status === 'Approved' || status === 'Denied'}>Deny</button>
                 </Table.Cell>
                 <Table.Cell>
                     <button onClick={() => openModal(_id)} className=' text-white font-bold bg-red-600 p-2 rounded-md'>Feedback</button>

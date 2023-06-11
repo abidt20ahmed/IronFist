@@ -15,10 +15,11 @@ import RoleModal from '../components/RoleModal';
 const Register = () => {
     const { createUser, logOut, role, user } = useContext(AuthContext)
     const email = user?.email;
-    const data = {
-        role: role,
-        email
-    };
+
+    // const data = {
+    //     role: role,
+    //     email
+    // };
     const navigate = useNavigate();
     const location = useLocation();
     const from = location?.state?.from?.pathname || '/'
@@ -30,7 +31,6 @@ const Register = () => {
     let [isOpen, setIsOpen] = useState(true)
     console.log(role);
     const classes = useLoaderData()
-    console.log(classes[0].email);
 
     const closeModal = () => {
         setIsOpen(false)
@@ -50,15 +50,14 @@ const Register = () => {
     }
 
 
-    const handleGoogleSignin = () => {
-        console.log(role);
-        signInWithPopup(auth, provider)
-            .then(result => {
-                const user = result.user;
-                toast('Signed in successfully')
-                navigate(from, { replace: true })
-
-                fetch('http://localhost:5000/postRoles', {
+    const addStudent = (email, picture, name) => {
+        const data = {
+            role: 'Student',
+            email,
+            picture,
+            name
+        };
+        fetch(`http://localhost:5000/postRoles/${email}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
@@ -72,9 +71,29 @@ const Register = () => {
                     .catch(error => {
                         console.log('Error:', error);
                     });
+    }
+
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/role/email/${email}`)
+            .then(res => res.json())
+            .then(data => {
+                setUsers(data)
+            });
+    }, [])
+
+    const handleGoogleSignin = () => {
+        console.log(role);
+        signInWithPopup(auth, provider)
+            .then(result => {
+                const user = result.user;
+                toast('Signed in successfully')
+                console.log(user.email);
+                addStudent(user.email, user.photoURL, user.displayName)
+                navigate(from, { replace: true })
                 // setIsOpen(true)
 
-                console.log(result.user.photoURL);
+                console.log(user.photoURL);
 
             })
             .catch(error => {
@@ -90,17 +109,12 @@ const Register = () => {
             .then(result => {
                 const createdUser = result.user
                 toast('successfully registered. Login now!')
-                fetch(`http://localhost:5000/updateClass/${classes._id}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ data })
-                })
+                addStudent(createdUser.email)
                     .then(res => res.json())
                     .then(data => {
                         console.log(data);
-                        if (data.modifiedCount > 0) {
-                            toast('Toys Updated Successfully')
-                            // navigate('/myToys')
+                        if (data.modifiedCount > 0) {                         
+                            // navigate('/lasses')
                         }
 
                     })
@@ -132,7 +146,7 @@ const Register = () => {
         <>
             <NavBar />
 
-            <RoleModal isOpen={isOpen} closeModal={closeModal} />
+            {/* <RoleModal isOpen={isOpen} closeModal={closeModal} /> */}
             {/* <div className="fixed inset-0 flex items-center justify-center">
                 <button
                     type="button"
@@ -211,8 +225,8 @@ const Register = () => {
                             required={true}
                             shadow={true}
                         />
-                        <FaEye onClick={() => handlePassword('text')} className={`absolute text-2xl text-gray-500  dark:text-white top-1/4 right-3 ${password === 'password' ? 'block' : 'hidden'}`} />
-                        <FaEyeSlash onClick={() => handlePassword('password')} className={`absolute text-2xl text-gray-500  dark:text-white top-1/4 right-3 ${password === 'password' ? 'hidden' : 'block'}`} />
+                        <FaEye onClick={() => handlePassword('text')} type="button" className={`absolute text-2xl text-gray-500  dark:text-white top-1/4 right-3 ${password === 'password' ? 'block' : 'hidden'}`} />
+                        <FaEyeSlash onClick={() => handlePassword('password')} type="button" className={`absolute text-2xl text-gray-500  dark:text-white top-1/4 right-3 ${password === 'password' ? 'hidden' : 'block'}`} />
                     </div>
                 </div>
                 {!errorText && <small>Please create a strong and secure password with a combination of uppercase and lowercase letters, numbers, and special characters.</small>}

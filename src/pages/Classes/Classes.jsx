@@ -8,7 +8,6 @@ import Typewriter from 'typewriter-effect';
 
 const Classes = () => {
     const [classes] = useClasses();
-    console.log(classes);
 
     const sectionStyle = {
         backgroundImage: "url('https://img.freepik.com/free-photo/full-shot-teen-practicing-taekwondo_23-2150260460.jpg?w=1380&t=st=1686340904~exp=1686341504~hmac=caffbf0e86f387aa8ab2de599edf803746e4319db39c1b3c1b81fee9e949cb10')",
@@ -37,7 +36,6 @@ const Classes = () => {
                                 onInit={(typewriter) => {
                                     typewriter.typeString(' Discover Our <br/> Highly Skilled Instructors')
                                         .callFunction(() => {
-                                            console.log('Discover Our <br />Highly Skilled Instructors');
                                         })
                                         // .pauseFor(2500)
                                         // .deleteAll()
