@@ -7,7 +7,7 @@ import RoleModal from './RoleModal';
 const UserList = ({ userData, setReload, reload, makeAdmin }) => {
     const { picture, name, email, role } = userData;
 
-    console.log(role);
+    // console.log(role);
 
 
     const handleStatus = (id, status) => {
@@ -59,10 +59,10 @@ const UserList = ({ userData, setReload, reload, makeAdmin }) => {
                     {role}
                 </Table.Cell>
                 <Table.Cell>
-                    <button onClick={() => makeAdmin(email, 'admin', name)} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-200'>Make Admin</button>
+                    <button onClick={() => makeAdmin(email, 'admin', name)} disabled={role === 'Admin'} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-100 disabled:text-gray-300'>Make Admin</button>
                 </Table.Cell>
                 <Table.Cell>
-                    <button onClick={() => makeAdmin(email, 'instructor', name)} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-200'>Make Instructor</button>
+                    <button onClick={() => makeAdmin(email, 'instructor', name)} disabled={role === 'Instructor'} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-200'>Make Instructor</button>
                 </Table.Cell>
             </Table.Row>
 

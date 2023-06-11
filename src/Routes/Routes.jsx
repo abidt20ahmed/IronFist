@@ -44,20 +44,20 @@ const router = createBrowserRouter([
         element: <Classes />
     },
     {
-        path: '/addClass',
-        element: <AddClass />
-    },
-    {
         path: '/dashboard',
         element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
             {
-                path: '/dashboard/dashboardMenu',
+                path: '/dashboard',
                 element: <DashboardMenu />
             },
             {
                 path: '/dashboard/manageClasses',
                 element: <ManageClasses />
+            },
+            {
+                path: '/dashboard/addClass',
+                element: <AddClass />
             },
             {
                 path: '/dashboard/manageUsers',

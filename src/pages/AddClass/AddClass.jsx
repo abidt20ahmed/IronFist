@@ -10,6 +10,8 @@ const AddClass = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
     useTitle('AddClass')
+    const instructorName = user?.displayName;
+    const email = user?.email;
 
     console.log(user);
 
@@ -29,6 +31,7 @@ const AddClass = () => {
         const date = new Date();
         const instructorName = user?.displayName;
         const instructorImage = user?.displayName;
+        console.log(instructorName);
         const email = user?.email;
         const data = {
             className: name,
@@ -41,7 +44,7 @@ const AddClass = () => {
             linkedIn,
             description,
             date,
-            status: 'pending',
+            status: 'Pending',
             instructorName,
             instructorImage,
             instructorPhoto,
@@ -75,12 +78,12 @@ const AddClass = () => {
 
 
         <>
-            <NavBar></NavBar>
+            {/* <NavBar></NavBar> */}
 
-            <h2 className=' text-center text-red-500 mt-36 text-5xl font-bold'>Add Class</h2>
 
-            <section className="bg-slte-100 dark:bg-gray-900 my-20">
-                <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16 bg-slate-100 dark:bg-slate-800 rounded-xl">
+            <section className="bg-slte-100 dark:bg-gray-900 my-10">
+                <div className="py-8 px-10 mx-auto max-w-5xl lg:py-16 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                    {/* <h2 className=' text-center text-red-500 mb-10 text-5xl font-bold'>Add Class</h2> */}
                     <h2 className="mb-10 text-xl font-bold text-gray-900 dark:text-white">Add a new class</h2>
                     <form className='' onSubmit={handleAddClass}>
                         <div className="grid gap-4 sm:grid-cols-3 sm:gap-6">
@@ -89,24 +92,32 @@ const AddClass = () => {
                                 <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Class name" required />
                             </div>
                             <div className="sm:col-span-2">
-                                <Label htmlFor="classPhoto" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class Photo Url</Label>
+                                <Label htmlFor="classPhoto" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class Image</Label>
                                 <input type="text" name="classPhoto" id="classPhoto" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Class Image Url" required />
                             </div>
                             <div className="w-full">
-                                <Label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Available Seats</Label>
-                                <input type="number" name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Price" required />
+                                <Label htmlFor="instructorName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</Label>
+                                <input type="text" name="instructorName" id="instructorName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder={instructorName} readOnly required />
                             </div>
                             <div className="sm:col-span-2">
-                                <Label htmlFor="instructorPhoto" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Photo Url</Label>
+                                <Label htmlFor="instructorPhoto" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Image</Label>
                                 <input type="text" name="instructorPhoto" id="instructorPhoto" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Your Image Url" required />
                             </div>
                             <div className="w-full">
-                                <Label htmlFor="seats" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Available Seats</Label>
-                                <input type="number" name="seats" id="seats" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Available Seats" required />
+                                <Label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</Label>
+                                <input type="text" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder={email} readOnly required />
                             </div>
                             <div className="sm:col-span-2">
                                 <Label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</Label>
                                 <input type="text" name="category" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Category" required />
+                            </div>
+                            <div className="w-full">
+                                <Label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</Label>
+                                <input type="number" name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Price" required />
+                            </div>
+                            <div className="sm:col-span-2">
+                                <Label htmlFor="seats" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Available Seats</Label>
+                                <input type="number" name="seats" id="seats" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Available Seats" required />
                             </div>
                             <div className="w-full">
                                 <Label htmlFor="instagram" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Instagram</Label>
@@ -129,13 +140,13 @@ const AddClass = () => {
                                 <textarea id="description" rows="5" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Class description here"></textarea>
                             </div>
                             <button type="submit" className=" text-white text-lg font-semibold bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800 py-3 rounded-md">
-                                Add Toy
+                                Add Now
                             </button>
                         </div>
                     </form>
                 </div>
             </section>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </>
     );
 };

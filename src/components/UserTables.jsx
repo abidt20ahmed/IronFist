@@ -14,7 +14,6 @@ const UserTables = () => {
     const [reload, setReload] = useState(true)
     const [feedbackId, setFeedbackId] = useState('')
 
-    console.log(users);
     // useEffect(() => {
     //     fetch(`http://localhost:5000/myClasses/${user?.email}`)
     //         .then(res => res.json())

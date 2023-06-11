@@ -43,7 +43,7 @@ const ClassList = ({ classData, setReload, reload, openModal }) => {
             <Table.Cell>
                 {email}
             </Table.Cell>
-            <Table.Cell>
+                <Table.Cell className=' text-center'>
                 {seats}
             </Table.Cell>
             <Table.Cell>

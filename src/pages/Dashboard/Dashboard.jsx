@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 import { Button, DarkThemeToggle, Table } from 'flowbite-react';
-import { Link, Outlet, useLoaderData } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLoaderData } from 'react-router-dom';
 import Class from '../../components/Class';
 import ClassList from '../../components/ClassList';
-import { FaArrowRight, FaRegEdit, FaUsers } from 'react-icons/fa';
+import { FaArrowRight, FaFileMedical, FaHome, FaRegEdit, FaUsers } from 'react-icons/fa';
+import { BiAddToQueue } from "react-icons/bi";
 import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
 import Fist from '../../assets/fist.png'
@@ -17,6 +18,7 @@ const Dashboard = () => {
 
     const { user } = useAuth();
     const [close, setClose] = useState(false)
+    const [role, setRole] = useState('')
 
     console.log(user?.photoURL);
     // const userEmail = user?.email;
@@ -60,13 +62,13 @@ const Dashboard = () => {
 
 
 
-    // useEffect(() => {
-    //     console.log(user.email);
-    //     fetch(`http://localhost:5000/role/${user.email}`)
-    //         .then(res => res.json())
-    //         .then(data => console.log(data))
-    // }, [user.email])
-
+    useEffect(() => {
+        console.log(user.email);
+        fetch(`http://localhost:5000/role/email/${user.email}`)
+            .then(res => res.json())
+            .then(data => setRole(data.role))
+    }, [user.email])
+    console.log(role);
 
 
 
@@ -99,23 +101,33 @@ const Dashboard = () => {
                     <ul className="space-y-2 font-medium mt-10">
 
                         <li>
-                            <Link to='/dashboard/dashboardMenu' className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-slate-700 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" className="w-6 h-6 text-white transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
-                                <span className="ml-3 text-white dark:text-gray-400">Dashboard</span>
-                            </Link>
-                        </li>
+                            <NavLink to='/dashboard' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                                <svg aria-hidden="true" className="w-6 h-6  transition duration-75 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
+                                <span className="ml-3">Dashboard</span>
+                            </NavLink>
+                        </li>                
+                        <li>
+                            {role === "Admin" && <NavLink to='/dashboard/manageClasses' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                                <FaRegEdit className='w-6 h-6 transition duration-75' />
+                                <span className="flex-1 ml-3 whitespace-nowrap ">Manage Classes</span>
+                            </NavLink>}
 
-                        <li>
-                            <Link to='/dashboard/manageClasses' className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-slate-700 dark:hover:bg-gray-700">
-                                <FaRegEdit className='w-6 h-6 text-white transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white' />
-                                <span className="flex-1 ml-3 whitespace-nowrap text-white dark:text-gray-400">Manage Classes</span>
-                            </Link>
+                            {role === "Admin" && <NavLink to='/dashboard/addClass' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                                <BiAddToQueue className='w-6 h-6 transition duration-75' />
+                                <span className="flex-1 ml-3 whitespace-nowrap ">Add a Class</span>
+                            </NavLink>}
                         </li>
                         <li>
-                            <Link to='/dashboard/manageUsers' className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-slate-700 dark:hover:bg-gray-700">
-                                <FaUsers className='w-6 h-6 text-white transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white' />
-                                <span className="flex-1 ml-3 whitespace-nowrap text-white dark:text-gray-400">Manage Users</span>
-                            </Link>
+                            <NavLink to='/dashboard/manageUsers' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                                <FaUsers className='w-6 h-6 transition duration-75 ' />
+                                <span className="flex-1 ml-3 whitespace-nowrap ">Manage Users</span>
+                            </NavLink>
+                        </li>
+                        <li><hr className='text-gray-400 opacity-80 dark:text-gray-400 my-5' />
+                            <NavLink to='/' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                                <FaHome className='w-6 h-6 transition duration-75 ' />
+                                <span className="flex-1 ml-3 whitespace-nowrap ">Home</span>
+                            </NavLink>
                         </li>
                         {/* <li>
                             <a href="#" className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-slate-700 dark:hover:bg-gray-700">
