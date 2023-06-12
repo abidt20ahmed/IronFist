@@ -106,31 +106,37 @@ const Dashboard = () => {
                                 <span className="ml-3">Dashboard</span>
                             </NavLink>
                         </li>
-                        {role === "Admin" || role === 'Instructor' && <li>
+                        {role === "Admin" && <li>
                             <NavLink to='/dashboard/manageClasses' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <FaRegEdit className='w-6 h-6 transition duration-75' />
                                 <span className="flex-1 ml-3 whitespace-nowrap ">Manage Classes</span>
                             </NavLink>
                         </li>}
-                        {role === "Admin" && <li>
+                        {role === "Instructor" && <li>
                             <NavLink to='/dashboard/manageClasses' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <FaRegEdit className='w-6 h-6 transition duration-75' />
                                 <span className="flex-1 ml-3 whitespace-nowrap ">My Classes</span>
                             </NavLink>
                         </li>}
+                        {role === "Instructor" && <li>
+                            <NavLink to='/dashboard/manageClasses' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                                <FaRegEdit className='w-6 h-6 transition duration-75' />
+                                <span className="flex-1 ml-3 whitespace-nowrap ">My Selected Classes</span>
+                            </NavLink>
+                        </li>}
 
-                        {role === "Admin" && <li>
+                        {role === "Instructor" && <li>
                             <NavLink to='/dashboard/addClass' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <BiAddToQueue className='w-6 h-6 transition duration-75' />
                                 <span className="flex-1 ml-3 whitespace-nowrap ">Add a Class</span>
                             </NavLink>
                         </li>}
-                        <li>
+                        {role === "Admin" && <li>
                             <NavLink to='/dashboard/manageUsers' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <FaUsers className='w-6 h-6 transition duration-75 ' />
                                 <span className="flex-1 ml-3 whitespace-nowrap ">Manage Users</span>
                             </NavLink>
-                        </li>
+                        </li>}
                         <li><hr className='text-gray-400 opacity-80 dark:text-gray-400 my-5' />
                             <NavLink to='/' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <FaHome className='w-6 h-6 transition duration-75 ' />
