@@ -54,7 +54,7 @@ const NavBar = () => {
                 <div className={`items-center justify-between ${hidden ? 'hidden' : ''} w-full md:flex md:w-auto md:order-1`} id="navbar-sticky">
                     <ul className="flex flex-col p-4 text-right md:p-0 mt-4 font-medium rounded-lg bg-a-500 md:flex-row md:space-x-8 md:mt-0 md:border-0  dark:bg-slate-700 md:dark:bg-slate-800 dark:border-gray-700">
                         <li>
-                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Home</NavLink>
+                            <NavLink to="/home" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Home</NavLink>
                         </li>
                         <li>
                             <NavLink to="/instructors" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Instructors</NavLink>
@@ -63,7 +63,7 @@ const NavBar = () => {
                             <NavLink to="/classes" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Classes</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard" className={({ isActive }) => (isActive ? ' text-slate-900 drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Dashboard</NavLink>
+                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-slate-900 drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Dashboard</NavLink>
                         </li>
                     </ul>
                 </div>

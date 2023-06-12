@@ -101,7 +101,7 @@ const Dashboard = () => {
                     <ul className="space-y-2 font-medium mt-10">
 
                         <li>
-                            <NavLink to='/dashboard' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                            <NavLink to='/' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <svg aria-hidden="true" className="w-6 h-6  transition duration-75 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
                                 <span className="ml-3">Dashboard</span>
                             </NavLink>
@@ -118,10 +118,16 @@ const Dashboard = () => {
                                 <span className="flex-1 ml-3 whitespace-nowrap ">My Classes</span>
                             </NavLink>
                         </li>}
-                        {role === "Instructor" && <li>
+                        {role === "Student" && <li>
                             <NavLink to='/dashboard/manageClasses' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <FaRegEdit className='w-6 h-6 transition duration-75' />
                                 <span className="flex-1 ml-3 whitespace-nowrap ">My Selected Classes</span>
+                            </NavLink>
+                        </li>}
+                        {role === "Student" && <li>
+                            <NavLink to='/dashboard/myEnrolledClasses' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                                <FaRegEdit className='w-6 h-6 transition duration-75' />
+                                <span className="flex-1 ml-3 whitespace-nowrap ">My Enrolled Classes</span>
                             </NavLink>
                         </li>}
 
@@ -138,7 +144,7 @@ const Dashboard = () => {
                             </NavLink>
                         </li>}
                         <li><hr className='text-gray-400 opacity-80 dark:text-gray-400 my-5' />
-                            <NavLink to='/' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
+                            <NavLink to='/home' className={({ isActive }) => (isActive ? 'flex items-center p-2 text-slate-800 rounded-lg dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700' : 'flex items-center p-2 text-white rounded-lg dark:text-gray-400 hover:bg-slate-700 dark:hover:bg-gray-700')}>
                                 <FaHome className='w-6 h-6 transition duration-75 ' />
                                 <span className="flex-1 ml-3 whitespace-nowrap ">Home</span>
                             </NavLink>

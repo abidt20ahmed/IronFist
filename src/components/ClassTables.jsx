@@ -9,6 +9,7 @@ import RoleModal from './RoleModal';
 import FeedbackModal from './FeedbackModal';
 import InstructorClassList from './InstructorClassList';
 import Feedback from './Feedback';
+import MySelectedClass from '../pages/MySelectedClass/MySelectedClass';
 
 const ClassTables = () => {
     const { user } = useAuth();
@@ -102,13 +103,13 @@ const ClassTables = () => {
                         <Table.HeadCell>
                             Class Name
                         </Table.HeadCell>
-                        <Table.HeadCell>
+                        <Table.HeadCell className='pl-8'>
                             Instructor
                         </Table.HeadCell>
                         <Table.HeadCell className="!pl-16">
                             Instructor Email
                         </Table.HeadCell>
-                        <Table.HeadCell>
+                        <Table.HeadCell className=' text-center'>
                             Available Seats
                         </Table.HeadCell>
                         {role === 'Admin' && 
@@ -119,9 +120,22 @@ const ClassTables = () => {
                             <Table.HeadCell>
                                 Enrolled
                             </Table.HeadCell>}
+                        {role === 'Admin' || role === 'Instructor' &&
                         <Table.HeadCell className="pl-16">
                             Status
-                        </Table.HeadCell>
+                            </Table.HeadCell>}
+                        {role === 'Student' &&
+                            <Table.HeadCell className="pl-16">
+                                Total Enrolled
+                            </Table.HeadCell>}
+                        {role === 'Student' &&
+                            <Table.HeadCell className="pl-7">
+                                Purchase
+                            </Table.HeadCell>}
+                        {role === 'Student' &&
+                            <Table.HeadCell className="pl-7">
+                                Delete
+                            </Table.HeadCell>}
                         {role === 'Admin' && 
                             <Table.HeadCell className="!pl-">
                             Approve
@@ -154,6 +168,13 @@ const ClassTables = () => {
 
                         {
                             classes.map((classData, index) => <InstructorClassList key={classData._id} openModal={openModal} reload={reload} setReload={setReload} classData={classData} index={index} ></InstructorClassList>)
+                        }
+
+                    </Table.Body>
+                    <Table.Body className={`divide-y ${role !== 'Student' && 'hidden'}`} >
+
+                        {
+                            classes.map((classData, index) => <MySelectedClass key={classData._id} openModal={openModal} reload={reload} setReload={setReload} classData={classData} index={index} />)
                         }
 
                     </Table.Body>

@@ -12,18 +12,13 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardMenu from "../components/DashboardMenu";
 import ManageClasses from "../components/ManageClasses";
 import ManageUsers from "../components/ManageUsers";
+import MyEnrolledClasses from "../pages/MyEnrolledClasses/MyEnrolledClasses";
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/home",
         element: <Home></Home>,
         errorElement: <Error></Error>,
-        children: [
-            {
-                path: '/',
-                // element:
-            }
-        ]
     },
     {
         path: '/login',
@@ -44,11 +39,11 @@ const router = createBrowserRouter([
         element: <Classes />
     },
     {
-        path: '/dashboard',
+        path: '/',
         element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
             {
-                path: '/dashboard',
+                path: '/',
                 element: <DashboardMenu />
             },
             {
@@ -56,13 +51,17 @@ const router = createBrowserRouter([
                 element: <ManageClasses />
             },
             {
+                path: '/dashboard/manageUsers',
+                element: <ManageUsers />
+            },
+            {
                 path: '/dashboard/addClass',
                 element: <AddClass />
             },
             {
-                path: '/dashboard/manageUsers',
-                element: <ManageUsers />
-            }
+                path: '/dashboard/myEnrolledClasses',
+                element: <MyEnrolledClasses />
+            },
         ]
         // loader: () => fetch('http://localhost:5000/classes')
     },
