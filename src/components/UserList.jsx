@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import RoleModal from './RoleModal';
 
 const UserList = ({ userData, setReload, reload, handleRole }) => {
-    const { picture, name, email, role } = userData;
+    const { picture, name, email, role } = userData || []
 
     // console.log(role);
 
@@ -13,7 +13,7 @@ const UserList = ({ userData, setReload, reload, handleRole }) => {
     const handleStatus = (id, status) => {
         setReload(!reload)
         const state = { status: status }
-        fetch(`${import.meta.env.VITE_API_URL}/status/${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/role/email/${email}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -31,15 +31,15 @@ const UserList = ({ userData, setReload, reload, handleRole }) => {
 
 
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const res = await fetch(`${import.meta.env.VITE_API_URL}/role/${email}`)
-    //         const data = await res.json()
-    //         setRole(data)
-    //         return data
-    //     }
-    //     fetchData()
-    // }, [email])
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/role/email/${email}`)
+            const data = await res.json()
+
+            return data
+        }
+        fetchData()
+    }, [email])
 
 
 
@@ -59,11 +59,10 @@ const UserList = ({ userData, setReload, reload, handleRole }) => {
                     {role}
                 </Table.Cell>
                 <Table.Cell className=' text-center'>
-                    <form onClick={() => handleRole(email, 'admin', name)} >  <button type='submit' disabled={role === 'Admin'} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-100 disabled:text-gray-300'>Make Admin</button></form>
+                    <button onClick={() => handleRole(email, 'admin', name)} type='submit' disabled={role === 'Admin'} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-100 disabled:text-gray-300'>Make Admin</button>
                 </Table.Cell>
                 <Table.Cell className=' text-center'>
-                    <form onSubmit={() => handleRole(email, 'instructor', name)}><button type='submit' disabled={role === 'Instructor'} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-200'>Make Instructor</button></form>
-
+                    <button onClick={() => handleRole(email, 'instructor', name)} type='submit' disabled={role === 'Instructor'} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-200'>Make Instructor</button>
                 </Table.Cell>
             </Table.Row>
 

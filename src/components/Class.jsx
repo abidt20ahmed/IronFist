@@ -55,8 +55,6 @@ const Class = ({ refetch, classData }) => {
             .then(res => res.json())
             .then(result => {
 
-                // console.log(result);
-                // navigate('/classes')
                 toast('Class Selected Successfully')
 
                 fetch(`${import.meta.env.VITE_API_URL}/selectedId/${_id}`)

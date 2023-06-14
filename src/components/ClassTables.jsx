@@ -69,18 +69,26 @@ const ClassTables = () => {
     }, [user.email, role])
 
 
+    // useEffect(() => {
+    //     fetch(`${import.meta.env.VITE_API_URL}/classes`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (role === 'Admin') {
+    //             setClasses(data)
+    //             }
+    //         });
+    // }, [user?.email, role, reload])
+
+
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}/classes`)
             .then(res => res.json())
             .then(data => {
                 if (role === 'Admin') {
-                setClasses(data)
+                    setClasses(data);
                 }
             });
-    }, [user?.email, role])
-
-
-
+    }, [user?.email, role, reload]);
 
 
     const handleDelete = (id) => {

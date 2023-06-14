@@ -8,8 +8,8 @@ const ClassList = ({ classData, setReload, reload, openModal }) => {
     const { _id, className, instructorName, classImage, instructorImage, email, title, price, enrolled, availableSeats, description, seats, status } = classData;
 
     const handleStatus = (id, status) => {
-        setReload(!reload)
         const state = { status: status }
+        setReload(true)
         fetch(`${import.meta.env.VITE_API_URL}/status/${id}`, {
             method: 'PATCH',
             headers: {
@@ -22,6 +22,7 @@ const ClassList = ({ classData, setReload, reload, openModal }) => {
 
                 if (data.modidiedCount > 0) {
                     toast('User Role Updated')
+                    setReload(false)
                 }
             })
     }
