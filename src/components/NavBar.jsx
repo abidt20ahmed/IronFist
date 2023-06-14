@@ -13,8 +13,7 @@ const NavBar = () => {
     const handleLogOut = () => {
         logOut()
     }
-    // bg - gradient - to - r from - cyan - 500 to - blue - 500
-    // console.log(user);
+
     return (
 
         <nav className="bg-[#D01F26] text-white dark:bg-slate-800 fixed w-full z-20 top-0 left-0  dark:border-gray-600">
@@ -29,9 +28,10 @@ const NavBar = () => {
                     <div className='flex gap-4'>
                         <div className='flex gap-3'>
 
+
                             {
                                 auth?.currentUser &&
-                                <Avatar className='hidden md:block' alt="User settings" img={user?.photoURL} title={user?.displayName} rounded={true} />
+                                <img className="h-12 w-12 rounded-full object-cover" alt="User settings" src={user?.photoURL} title={user?.displayName} />
 
                             }
 
@@ -54,7 +54,7 @@ const NavBar = () => {
                 <div className={`items-center justify-between ${hidden ? 'hidden' : ''} w-full md:flex md:w-auto md:order-1`} id="navbar-sticky">
                     <ul className="flex flex-col p-4 text-right md:p-0 mt-4 font-medium rounded-lg bg-a-500 md:flex-row md:space-x-8 md:mt-0 md:border-0  dark:bg-slate-700 md:dark:bg-slate-800 dark:border-gray-700">
                         <li>
-                            <NavLink to="/home" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Home</NavLink>
+                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Home</NavLink>
                         </li>
                         <li>
                             <NavLink to="/instructors" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Instructors</NavLink>
@@ -62,9 +62,9 @@ const NavBar = () => {
                         <li>
                             <NavLink to="/classes" className={({ isActive }) => (isActive ? ' text-black drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Classes</NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/" className={({ isActive }) => (isActive ? ' text-slate-900 drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Dashboard</NavLink>
-                        </li>
+                        {user && <li>
+                            <NavLink to="/dashboard" className={({ isActive }) => (isActive ? ' text-slate-900 drop-shadow-lg dark:text-red-600' : 'hover:text-slate-200')} aria-current="page">Dashboard</NavLink>
+                        </li>}
                     </ul>
                 </div>
             </div>

@@ -10,7 +10,7 @@ const useCart = () => {
         enabled: !loading,
         queryFn: async () => {
             const res = await axiosSecure(`/carts?email=${user?.email}`)
-            console.log('res from axios', res)
+
             return res.data;
         },
     })
@@ -19,10 +19,3 @@ const useCart = () => {
 
 }
 export default useCart;
-
-// queryFn: async () => {
-        //     const res = await fetch(`https://bistro-boss-server-fawn.vercel.app/carts?email=${user?.email}`, { headers: {
-        //         authorization: `bearer ${token}`
-        //     }})
-        //     return res.json();
-        // },

@@ -1,21 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
-const useClasses = () => {
-    // const [menu, setMenu] = useState([]);
-    // const [loading, setLoading] = useState(true);
-    // useEffect(() => {
-    //     fetch('https://bistro-boss-server-fawn.vercel.app/menu')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setMenu(data);
-    //             setLoading(false);
-    //         });
-    // }, [])
+const useClasses = (id) => {
 
     const { data: clases = [], isLoading: loading, refetch } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/classes');
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/classes`);
             return res.json();
         }
     })

@@ -5,13 +5,13 @@ import { toast } from 'react-toastify';
 import useAuth from '../hooks/useAuth';
 
 const RoleModal = ({ isOpen, closeModal }) => {
-    // const [role, setRole] = useState([])
+
     const { setRole } = useAuth()
 
     const role = (role) => {
         const data = { role: role }
         setRole(role)
-        console.log(data);
+
         if (role) {
             closeModal()
         }

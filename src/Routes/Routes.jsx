@@ -13,10 +13,16 @@ import DashboardMenu from "../components/DashboardMenu";
 import ManageClasses from "../components/ManageClasses";
 import ManageUsers from "../components/ManageUsers";
 import MyEnrolledClasses from "../pages/MyEnrolledClasses/MyEnrolledClasses";
+import UpdateClass from "../components/UpdateClass";
+import Payment from "../pages/Payment/Payment";
+import History from "../pages/History/History";
+import AdminRoute from "./AdminRoute";
+import InstractorRoute from "./InstructorRoute";
+import StudentRoute from "./StudentRoute";
 
 const router = createBrowserRouter([
     {
-        path: "/home",
+        path: "/",
         element: <Home></Home>,
         errorElement: <Error></Error>,
     },
@@ -27,24 +33,24 @@ const router = createBrowserRouter([
     {
         path: '/register',
         element: <Register />,
-        loader: () => fetch('http://localhost:5000/classes')
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/classes`)
     },
     {
         path: '/instructors',
         element: <Instructors />,
-        loader: () => fetch('http://localhost:5000/classes')
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/classes`)
     },
     {
         path: '/classes',
         element: <Classes />
     },
     {
-        path: '/',
+        path: '/dashboard',
         element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
             {
-                path: '/',
-                element: <DashboardMenu />
+                path: '/dashboard',
+                element: <PrivateRoute><DashboardMenu /></PrivateRoute>
             },
             {
                 path: '/dashboard/manageClasses',
@@ -52,15 +58,28 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/manageUsers',
-                element: <ManageUsers />
+                element: <AdminRoute><ManageUsers /></AdminRoute>
             },
             {
                 path: '/dashboard/addClass',
-                element: <AddClass />
+                element: <InstractorRoute><AddClass /></InstractorRoute>
             },
             {
                 path: '/dashboard/myEnrolledClasses',
-                element: <MyEnrolledClasses />
+                element: <StudentRoute><MyEnrolledClasses /></StudentRoute>
+            },
+            {
+                path: '/dashboard/history',
+                element: <StudentRoute><History /></StudentRoute>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <StudentRoute><Payment /></StudentRoute>,
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/selected/id/${params.id}`)
+            },
+            {
+                path: '/dashboard/modal',
+                element: <InstractorRoute><UpdateClass /></InstractorRoute>
             },
         ]
         // loader: () => fetch('http://localhost:5000/classes')

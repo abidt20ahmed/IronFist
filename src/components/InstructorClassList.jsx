@@ -5,14 +5,15 @@ import { toast } from 'react-toastify';
 import RoleModal from './RoleModal';
 import Feedback from './Feedback';
 import FeedbackModal from './FeedbackModal';
+import { IoIosNotifications, IoIosNotificationsOff } from "react-icons/io";
 
-const InstructorClassList = ({ classData, setReload, reload, openModal }) => {
+const InstructorClassList = ({ classData, setReload, reload, openModal, openClassUpdate }) => {
     const { _id, className, instructorName, classImage, instructorImage, feedback, email, title, price, enrolled, availableSeats, description, seats, status } = classData;
 
     const handleStatus = (id, status) => {
         setReload(!reload)
         const state = { status: status }
-        fetch(`http://localhost:5000/status/${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/status/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -21,7 +22,7 @@ const InstructorClassList = ({ classData, setReload, reload, openModal }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.modidiedCount > 0) {
                     toast('User Role Updated')
                 }
@@ -33,15 +34,15 @@ const InstructorClassList = ({ classData, setReload, reload, openModal }) => {
         <>
             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" >
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    <img className=' w-40 rounded-lg' src={classImage} alt="" />
+                    <img className=' w-40 mx-auto rounded-lg' src={classImage} alt="" />
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className=' text-center'>
                     {className}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className=' text-center'>
                     {instructorName}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className=' text-center'>
                     {email}
                 </Table.Cell>
                 <Table.Cell className=' text-center'>
@@ -50,15 +51,15 @@ const InstructorClassList = ({ classData, setReload, reload, openModal }) => {
                 <Table.Cell className=' text-center'>
                     {enrolled ? enrolled : 0}
                 </Table.Cell>
-                <Table.Cell className="!p-16">
+                <Table.Cell className="!p- text-center">
                     {status === 'Pending' && <p className=' text-yellow-400'>{status}</p> || status === 'Approved' && <p className=' text-green-400'>{status}</p> || status === 'Denied' && <p className=' text-red-500'>{status}</p>}
                     <div></div>
                 </Table.Cell>
-                <Table.Cell>
-                    <button onClick={() => openModal(feedback)} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-200'>Feedback</button>
+                <Table.Cell className=' text-center'>
+                    <button onClick={() => openModal(feedback)} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-200 relative px-5'>Feedback{feedback && <IoIosNotifications className=' absolute top-1 right-1 text-gray-100' />}</button>
                 </Table.Cell>
-                <Table.Cell>
-                    <button className=' text-white font-bold bg-red-600 p-2 rounded-md'>Update</button>
+                <Table.Cell className=' text-center'>
+                    <button onClick={() => openClassUpdate(_id)} className=' text-white font-bold bg-red-600 p-2 rounded-md'>Update</button>
                 </Table.Cell>
             </Table.Row>
 

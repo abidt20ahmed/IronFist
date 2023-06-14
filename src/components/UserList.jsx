@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import RoleModal from './RoleModal';
 
-const UserList = ({ userData, setReload, reload, makeAdmin }) => {
+const UserList = ({ userData, setReload, reload, handleRole }) => {
     const { picture, name, email, role } = userData;
 
     // console.log(role);
@@ -13,7 +13,7 @@ const UserList = ({ userData, setReload, reload, makeAdmin }) => {
     const handleStatus = (id, status) => {
         setReload(!reload)
         const state = { status: status }
-        fetch(`http://localhost:5000/status/${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/status/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -22,7 +22,7 @@ const UserList = ({ userData, setReload, reload, makeAdmin }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+
                 if (data.modidiedCount > 0) {
                     toast('User Role Updated')
                 }
@@ -33,7 +33,7 @@ const UserList = ({ userData, setReload, reload, makeAdmin }) => {
 
     // useEffect(() => {
     //     const fetchData = async () => {
-    //         const res = await fetch(`http://localhost:5000/role/${email}`)
+    //         const res = await fetch(`${import.meta.env.VITE_API_URL}/role/${email}`)
     //         const data = await res.json()
     //         setRole(data)
     //         return data
@@ -49,20 +49,21 @@ const UserList = ({ userData, setReload, reload, makeAdmin }) => {
                 <Table.Cell className="whitespace-nowrap w-28 font-medium text-gray-900 dark:text-white">
                     <img className=' w rounded-full' src={picture} alt="" />
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className=' text-center'>
                     {name}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className=' text-center'>
                     {email}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className=' text-center'>
                     {role}
                 </Table.Cell>
-                <Table.Cell>
-                    <button onClick={() => makeAdmin(email, 'admin', name)} disabled={role === 'Admin'} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-100 disabled:text-gray-300'>Make Admin</button>
+                <Table.Cell className=' text-center'>
+                    <form onClick={() => handleRole(email, 'admin', name)} >  <button type='submit' disabled={role === 'Admin'} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-100 disabled:text-gray-300'>Make Admin</button></form>
                 </Table.Cell>
-                <Table.Cell>
-                    <button onClick={() => makeAdmin(email, 'instructor', name)} disabled={role === 'Instructor'} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-200'>Make Instructor</button>
+                <Table.Cell className=' text-center'>
+                    <form onSubmit={() => handleRole(email, 'instructor', name)}><button type='submit' disabled={role === 'Instructor'} className=' text-white font-bold bg-red-600 p-2 rounded-md disabled:bg-gray-200'>Make Instructor</button></form>
+
                 </Table.Cell>
             </Table.Row>
 

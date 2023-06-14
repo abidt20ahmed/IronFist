@@ -1,7 +1,8 @@
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FcGoogle } from "react-icons/fc";
 import { toast } from 'react-toastify';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { AuthContext } from '../context/AuthProvider';
@@ -22,7 +23,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location?.state?.from?.pathname || '/'
-    console.log(from);
+    // console.log(from);
 
 
     const handleGoogleSignin = () => {
@@ -32,7 +33,7 @@ const Login = () => {
                 toast('Signed in successfully')
                 navigate(from, { replace: true })
 
-                console.log(result.user.photoURL);
+                // console.log(result.user.photoURL);
 
             })
             .catch(error => {
@@ -41,7 +42,7 @@ const Login = () => {
     }
 
     const handlePassword = (type) => {
-        console.log(type);
+        // console.log(type);
         setPassword(type)
     }
 
@@ -68,13 +69,10 @@ const Login = () => {
             <NavBar />
             <form onSubmit={handleSubmit(onSubmit)} className="flex px-10 md:px-20 flex-col gap-4 mt-40 mb-20 rounded-lg max-w-[500px] mx-auto bg-slate-200 pt-10 py-10">
                 <h1 className=" text-4xl font-bold text-center pb-10 text-red-600">Login</h1>
-                <div className='flex justify-between items-center my-5 gap-10'>
+                <div className='flex justify-between items-center my-5'>
 
                     <button onClick={handleGoogleSignin} className='border border-[#D01F26] w-full py-2 rounded-lg flex justify-center gap-3'>
-                        <FaGoogle className=' text-blue-600 mx-aut w-6 h-6 rounded-full py-0'></FaGoogle>Google
-                    </button>
-                    <button onClick={handleGoogleSignin} className='border border-[#D01F26] w-full py-2 rounded-lg flex justify-center gap-3'>
-                        <FaGoogle className=' text-blue-600 mx-aut w-6 h-6 rounded-full py-0'></FaGoogle>Google
+                        <FcGoogle className=' text-blue-600 mx-aut w-7 h-7 rounded-full py-0'></FcGoogle>Login with Google
                     </button>
 
 

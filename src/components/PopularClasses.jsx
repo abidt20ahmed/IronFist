@@ -6,9 +6,9 @@ const PopularClasses = () => {
     const [classes, setClasses] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/classes')
+        fetch(`${import.meta.env.VITE_API_URL}/classes`)
             .then(res => res.json())
-            .then(data => setClasses(data))
+            .then(data => setClasses(data.slice(0, 6)))
     }, [])
 
     return (

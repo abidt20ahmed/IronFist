@@ -7,6 +7,7 @@ import PopularClasses from '../../components/PopularClasses';
 import PopularInstructors from '../../components/PopularInstructors';
 import CountUp from 'react-countup';
 import Typewriter from 'typewriter-effect';
+import Zoom from 'react-reveal/Zoom';
 
 
 const Home = () => {
@@ -28,6 +29,7 @@ const Home = () => {
             <NavBar />
             <section style={sectionStyle}>
                 <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
+                    <Zoom>
                     <h1 className="mb-4 text-3xl font-bold tracking-tight leading-none text-white md:text-5xl lg:text-6xl"><span
                         className="inline-block h-full  bg-clip-text"
                         style={{
@@ -40,6 +42,8 @@ const Home = () => {
                         The best thing is not to fight at all.
                     </span></h1>
                     <p className="mb-8 text-lg font-semibold text-gray-300 lg:text-xl sm:px-16 lg:px-48">Unlock your potential. Master self-defense techniques and build unshakable confidence. Empower yourself today!</p>
+                    </Zoom>
+
                     {/* <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
                         <Button gradientDuoTone="purpleToBlue" className="inline-flex justify-center items-center py-1 px-4 text-base font-medium text-center text-white rounded-lg bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900">
                             Get started
@@ -59,7 +63,7 @@ const Home = () => {
 
                         <div className="">
                             <span className=" text-5xl font-bold text-red-600">
-                                <CountUp start={0} end={130} delay={0}>
+                                <CountUp start={30} end={130} delay={0}>
                                     {({ countUpRef }) => (
                                         <div>
                                             <span ref={countUpRef} />
@@ -72,7 +76,7 @@ const Home = () => {
 
                         <div className="">
                             <span className=" text-5xl font-bold text-red-600">
-                                <CountUp start={0} end={17} delay={0}>
+                                <CountUp start={117} end={17} delay={0}>
                                     {({ countUpRef }) => (
                                         <div>
                                             <span ref={countUpRef} />
@@ -84,7 +88,7 @@ const Home = () => {
 
                         <div className="">
                             <span className=" text-5xl font-bold text-red-600">
-                                <CountUp start={0} end={9} delay={0}>
+                                <CountUp start={109} end={9} delay={0}>
                                     {({ countUpRef }) => (
                                         <div>
                                             <span ref={countUpRef} />
@@ -97,7 +101,7 @@ const Home = () => {
 
                         <div className="">
                             <span className=" text-5xl font-bold text-red-600">
-                                <CountUp start={0} end={15} delay={0}>
+                                <CountUp start={115} end={15} delay={0}>
                                     {({ countUpRef }) => (
                                         <div>
                                             <span ref={countUpRef} />
@@ -191,7 +195,7 @@ const Home = () => {
 
                             <Typewriter
                                 onInit={(typewriter) => {
-                                    typewriter.typeString('Popular Classes . . .')
+                                    typewriter.typeString('Popular Instructors . . .')
                                         .callFunction(() => {
                                         })
                                         // .pauseFor(2500)

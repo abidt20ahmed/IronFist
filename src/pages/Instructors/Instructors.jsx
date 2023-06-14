@@ -4,6 +4,8 @@ import Instractor from '../../components/Instractor';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 import Typewriter from 'typewriter-effect';
+import { Fade } from 'react-reveal';
+import Zoom from 'react-reveal/Zoom';
 
 
 const Instructors = () => {
@@ -36,7 +38,7 @@ const Instructors = () => {
                                 onInit={(typewriter) => {
                                     typewriter.typeString(' Discover Our <br/> Highly Skilled Instructors')
                                         .callFunction(() => {
-                                            console.log('String typed out!');
+                                            // console.log('String typed out!');
                                         })
                                         // .pauseFor(2500)
                                         // .deleteAll()
@@ -55,13 +57,13 @@ const Instructors = () => {
                 </div>
             </section>
 
-            <h2 className=' text-center mt-20 text-5xl font-bold'>Instructors</h2>
+            <Zoom bottom>  <h2 className=' text-center mt-20 text-5xl font-bold text-red-600'>Instructors</h2></Zoom>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto my-20" data-aos="zoom-in" data-aos-delay="100">
+            <Zoom> <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto my-20" data-aos="zoom-in" data-aos-delay="100">
                 {
                     instructors.map(instructor => <Instractor key={instructor._id} instructor={instructor} />)
                 }
-            </div>
+            </div></Zoom>
 
 
             <Footer />

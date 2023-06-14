@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar';
 import useAuth from '../../hooks/useAuth';
 import Footer from '../../components/Footer';
 
-const AddClass = () => {
+const UpdateClass = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
     useTitle('AddClass')
@@ -23,35 +23,30 @@ const AddClass = () => {
         const facebook = form.facebook.value;
         const instagram = form.instagram.value;
         const twitter = form.twitter.value;
-        const classImage = form.classPhoto?.value;
+        const classPhoto = form.classPhoto?.value;
         const instructorPhoto = form.instructorPhoto?.value;
         const category = form.category.value;
-        const price = form.price.value;
         const linkedIn = form.linkedIn.value;
         const description = form.description.value;
         const date = new Date();
         const instructorName = user?.displayName;
-        const instructorImage = user?.photoURL;
-        // console.log(instructorName);
-
+        const instructorImage = user?.displayName;
         const email = user?.email;
         const data = {
             className: name,
             facebook,
             instagram,
             twitter,
-            classImage,
+            classPhoto,
             category,
-            seats: parseInt(seats),
+            seats,
             linkedIn,
             description,
             date,
-            price: parseInt(price),
             status: 'Pending',
             instructorName,
             instructorImage,
             instructorPhoto,
-            enrolled: 0,
             email
 
 
@@ -59,18 +54,17 @@ const AddClass = () => {
 
 
         fetch(`${import.meta.env.VITE_API_URL}/postClass`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
             .then(res => res.json())
             .then(result => {
-
                 navigate('/classes')
-                toast('Class Posted Successfully')
+                toast('Class Updated Successfully')
             })
             .catch(error => {
-
+                console.log('Error:', error);
             });
 
 
@@ -155,4 +149,4 @@ const AddClass = () => {
     );
 };
 
-export default AddClass;
+export default UpdateClass;

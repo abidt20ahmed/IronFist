@@ -5,7 +5,8 @@ import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { AuthContext } from '../context/AuthProvider';
 import app from '../firebase/firebase.config';
-import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FcGoogle } from "react-icons/fc";
 import { useForm } from 'react-hook-form';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
@@ -29,7 +30,7 @@ const Register = () => {
     const auth = getAuth(app)
     const provider = new GoogleAuthProvider();
     let [isOpen, setIsOpen] = useState(true)
-    console.log(role);
+    // console.log(role);
     const classes = useLoaderData()
 
     const closeModal = () => {
@@ -57,14 +58,14 @@ const Register = () => {
             picture,
             name
         };
-        fetch(`http://localhost:5000/postRoles/${email}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/postRoles/${email}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 })
                     .then(res => res.json())
                     .then(result => {
-                        console.log(result);
+                        // console.log(result);
                         navigate('/classes')
                         toast('Toy Posted Successfully')
                     })
@@ -75,7 +76,7 @@ const Register = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/role/email/${email}`)
+        fetch(`${import.meta.env.VITE_API_URL}/role/email/${email}`)
             .then(res => res.json())
             .then(data => {
                 setUsers(data)
@@ -83,17 +84,17 @@ const Register = () => {
     }, [])
 
     const handleGoogleSignin = () => {
-        console.log(role);
+        // console.log(role);
         signInWithPopup(auth, provider)
             .then(result => {
                 const user = result.user;
                 toast('Signed in successfully')
-                console.log(user.email);
+                // console.log(user.email);
                 addStudent(user.email, user.photoURL, user.displayName)
                 navigate(from, { replace: true })
                 // setIsOpen(true)
 
-                console.log(user.photoURL);
+                // console.log(user.photoURL);
 
             })
             .catch(error => {
@@ -112,9 +113,9 @@ const Register = () => {
                 addStudent(createdUser.email)
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         if (data.modifiedCount > 0) {                         
-                            // navigate('/lasses')
+                            // navigate('/classes')
                         }
 
                     })
@@ -131,7 +132,7 @@ const Register = () => {
             displayName: data.name, photoURL: data.photo
         }).then(() => {
             // Profile updated!
-            console.log('Profile updated!');
+            // console.log('Profile updated!');
         }).catch((error) => {
             // An error occurred
             // console.log(error);
@@ -162,7 +163,7 @@ const Register = () => {
                 <h1 className=" text-4xl font-bold text-center pb-10 text-red-600">Register</h1>
 
                 <button onClick={handleGoogleSignin} className='border border-[#D01F26] w-ful py-2 rounded-lg flex justify-center gap-3'>
-                    <FaGoogle className=' text-blue-600 w-6 h-6 rounded-full py-0'></FaGoogle>Sign up with Google
+                    <FcGoogle className=' text-blue-600 w-8 h-8 rounded-full py-0'></FcGoogle>Sign up with Google
                 </button>
 
 
@@ -285,7 +286,7 @@ const Register = () => {
                     <Label htmlFor="agree">
                         I agree with the
                         <a
-                            href="/forms"
+                            href="#"
                             className="ml-2 text-blue-600 hover:underline dark:text-blue-500"
                         >
                             terms and conditions

@@ -1,9 +1,56 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import useEnrolled from '../hooks/useEnrolled';
+import useAuth from '../hooks/useAuth';
+import useRole from '../hooks/useRole';
 
 const DashboardMenu = () => {
+    const [role] = useRole()
+    const { user } = useAuth()
+    const [enrolled, loading, refetch] = useEnrolled()
+    const [selected, setSelected] = useState()
+
+
+    useEffect(() => {
+
+        fetch(`${import.meta.env.VITE_API_URL}/selected/${user?.email}`)
+            .then(res => res.json())
+            .then(data => {
+
+                setSelected(data)
+
+            })
+    }, [user?.email])
+
+    // console.log(selected);
+
     return (
-        <div>
-            <h1>Dashboard Menu Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, cum quas. Inventore obcaecati officiis cum quo dolor pariatur et architecto enim commodi, totam maxime soluta quasi voluptates. Ratione reprehenderit ea id? Repudiandae aliquam deleniti asperiores aperiam eius necessitatibus impedit fuga fugit, quasi ducimus eos expedita. Beatae sit tenetur, commodi rerum ab, laboriosam similique iusto blanditiis, quasi dolores illum assumenda exercitationem vitae eum alias voluptatum. Eum, nulla? Id molestiae, rerum tempora optio minus accusamus iusto commodi unde sunt odio, illum nulla consequuntur. Libero ipsam eligendi iusto cupiditate quae perferendis accusamus temporibus? A provident minus quas non ducimus culpa optio, quia aperiam modi beatae praesentium eveniet amet reiciendis totam voluptate quo suscipit fuga excepturi debitis, molestias nulla blanditiis dolorem eligendi recusandae. Non blanditiis rerum eligendi illo commodi temporibus laboriosam, id, tenetur laudantium repudiandae cumque. Obcaecati doloremque, pariatur laboriosam est incidunt eveniet, praesentium porro ea, iusto consequatur nulla quisquam. Quasi enim ipsa minus quisquam deserunt dolor aut doloribus. Quasi veniam nulla ad quibusdam nihil laboriosam nisi temporibus fugit ex, libero aperiam sint eligendi qui corrupti obcaecati enim soluta earum. Voluptas, magnam voluptatem. Saepe numquam consequatur dolor eius at iste alias ab esse tenetur laudantium, delectus quis qui? Quis placeat sequi totam reiciendis non!</h1>
+        <div className="p-4 sm:ml-64">
+            {role === 'Student' && <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+                <div className="grid grid-cols-3 gap-4 mb-4">
+                    <div className="flex items-center justify-center h-52 rounded bg-blue-200 dark:bg-gray-800">
+                        <div>
+                            <p className="text-2xl text-gray-700 font-bold dark:text-white">Enrolled Classes</p>
+                            <p className="text-2xl text-gray-700 font-bold dark:text-white text-center">{enrolled?.length}</p>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-center h-52 rounded bg-blue-200 dark:bg-gray-800">
+                        <div>
+                            <p className="text-2xl text-gray-700 font-bold dark:text-white">{selected ? 'Selected Classes' : 'You have no classes selected'}</p>
+                            <p className="text-2xl text-gray-700 font-bold dark:text-white text-center">{selected?.length > 0 && selected?.length}</p>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-center h-52 rounded bg-blue-200 dark:bg-gray-800">
+                        <div>
+                            <p className="text-2xl text-gray-700 font-bold dark:text-white">Enrolled Classes</p>
+                            <p className="text-2xl text-gray-400 dark:text-white text-center">{enrolled?.length}</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex items-center justify-center  h-52 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+                    <p className="text-2xl text-gray-400 dark:text-white"></p>
+                </div>
+
+            </div>}
         </div>
     );
 };
