@@ -3,6 +3,7 @@ import PopularInstructor from './PopularInstructor';
 import { Fade } from 'react-reveal';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import TypingEffect from '../hooks/TypingEffect';
 
 const PopularInstructors = () => {
 
@@ -19,8 +20,14 @@ const PopularInstructors = () => {
 
     return (
         <Fade bottom>
+            <div className=' flex justify-center'>
+                {classes && <h2 className=' text-4xl mb-20 text-red-600 font-bold'>
+                    <Fade bottom>  <TypingEffect words={['Popular Instructors . . .', 'Best of the best']} /></Fade>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto" data-aos="zoom-in" data-aos-delay="100">
+                </h2>}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-7xl mx-auto justify-items-center" data-aos="zoom-in" data-aos-delay="100">
                 {
                     classes.map(classData => <PopularInstructor key={classData._id} classData={classData} />)
                 }

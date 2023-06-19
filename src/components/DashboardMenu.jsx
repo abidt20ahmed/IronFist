@@ -35,7 +35,7 @@ const DashboardMenu = () => {
                     </div>
                     <div className="flex items-center justify-center h-52 rounded bg-blue-200 dark:bg-gray-800">
                         <div>
-                            <p className="text-2xl text-gray-700 font-bold dark:text-white">{selected ? 'Selected Classes' : 'You have no classes selected'}</p>
+                            <p className="text-2xl text-gray-700 font-bold dark:text-white">{selected?.length > 0 ? 'Selected Classes' : 'You have no classes selected'}</p>
                             <p className="text-2xl text-gray-700 font-bold dark:text-white text-center">{selected?.length > 0 && selected?.length}</p>
                         </div>
                     </div>

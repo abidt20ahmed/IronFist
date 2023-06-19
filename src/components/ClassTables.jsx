@@ -20,6 +20,8 @@ const ClassTables = () => {
     const [role, setRole] = useState('')
     const [feedbackId, setFeedbackId] = useState('')
     const [feedback, setFeedback] = useState('')
+    const [isOpen, setIsOpen] = useState(false)
+    const [temp, setTemp] = useState(1)
 
 
     // ? to handle the empty array status
@@ -66,18 +68,10 @@ const ClassTables = () => {
                     setClasses(data)
                 }
             })
-    }, [user.email, role])
+    }, [user.email, role, temp])
+    console.log(temp);
 
 
-    // useEffect(() => {
-    //     fetch(`${import.meta.env.VITE_API_URL}/classes`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             if (role === 'Admin') {
-    //             setClasses(data)
-    //             }
-    //         });
-    // }, [user?.email, role, reload])
 
 
     useEffect(() => {
@@ -118,13 +112,13 @@ const ClassTables = () => {
 
 
 
-    let [isOpen, setIsOpen] = useState(false)
     let [open, setOpen] = useState(false)
     const closeModal = () => {
         setIsOpen(false)
     }
     const closeClassUpdate = () => {
         setOpen(false)
+        setTemp(temp + 1)
     }
 
     const openModal = (id) => {
@@ -162,9 +156,12 @@ const ClassTables = () => {
                             <Table.HeadCell className=' text-center'>
                             Class Name
                         </Table.HeadCell>
-                            <Table.HeadCell className='pl- text-center'>
+                            {role !== 'Instructor' && <Table.HeadCell className='pl- text-center'>
                             Instructor
-                        </Table.HeadCell>
+                            </Table.HeadCell>}
+                            {role === 'Instructor' && <Table.HeadCell className='pl- text-center'>
+                                Price
+                            </Table.HeadCell>}
                             <Table.HeadCell className="!pl- text-center">
                             Instructor Email
                         </Table.HeadCell>

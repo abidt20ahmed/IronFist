@@ -26,13 +26,37 @@ const Login = () => {
     // console.log(from);
 
 
+    const addStudent = (email, picture, name) => {
+        const data = {
+            role: 'Student',
+            email,
+            picture,
+            name
+        };
+        fetch(`${import.meta.env.VITE_API_URL}/postRoles/${email}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(result => {
+                // console.log(result);
+                navigate('/classes')
+                toast('Toy Posted Successfully')
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+    }
+
+
     const handleGoogleSignin = () => {
         signInWithPopup(auth, provider)
             .then(result => {
                 const user = result.user;
                 toast('Signed in successfully')
                 navigate(from, { replace: true })
-
+                addStudent(user.email, user.photoURL, user.displayName)
                 // console.log(result.user.photoURL);
 
             })

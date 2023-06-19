@@ -45,7 +45,7 @@ const Feedback = ({ isOpen, closeModal, feedback, openModal }) => {
                                 </Dialog.Title>
                                 <div className="mt-2 mb-5">
                                     <p className="text-sm text-gray-500">
-                                        {feedback}
+                                        {feedback ? feedback : 'No feedback given'}
                                     </p>
                                 </div>
 

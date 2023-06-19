@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 import { Link, Outlet } from 'react-router-dom';
@@ -8,9 +8,18 @@ import PopularInstructors from '../../components/PopularInstructors';
 import CountUp from 'react-countup';
 import Typewriter from 'typewriter-effect';
 import Zoom from 'react-reveal/Zoom';
+import TypingAnimation from '../../hooks/TypingEffect';
+import TypingEffect from '../../hooks/TypingEffect';
+import { Fade } from 'react-reveal';
+import Gallery from '../../components/Gallery';
+import './Home.css'
 
 
 const Home = () => {
+
+    const words = ['Hello', 'World', 'Typewriter', 'Animation'];
+
+
     const sectionStyle = {
         backgroundImage: "url('https://images.pexels.com/photos/7045482/pexels-photo-7045482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
         backgroundPosition: "center",
@@ -189,11 +198,12 @@ const Home = () => {
                     <PopularClasses />
                 </section>
                 <section id="popular-courses" className="mb-20">
-                    <div className="container mx-auto" data-aos="fade-up">
+                    <div className="container mx-auto  text-center md:text-left" data-aos="fade-up">
+                        {/* <Zoom> */}
 
-                        <h2 className=' text-4xl mb-20 text-red-600 font-bold'>
+                        {/* <h2 className=' text-4xl mb-20 text-red-600 font-bold'> */}
 
-                            <Typewriter
+                        {/* <Typewriter
                                 onInit={(typewriter) => {
                                     typewriter.typeString('Popular Instructors . . .')
                                         .callFunction(() => {
@@ -205,8 +215,12 @@ const Home = () => {
                                         // })
                                         .start();
                                 }}
-                            />
-                        </h2>
+                            /> */}
+
+                        {/* <TypingEffect words={['Popular Instructors . . .']} /> */}
+
+                        {/* </h2> */}
+                        {/* </Zoom> */}
 
                         <PopularInstructors />
 
@@ -214,7 +228,53 @@ const Home = () => {
                 </section>
 
 
-                <Outlet></Outlet>
+
+                <h2 className=' text-4xl mb-20 text-red-600 font-bold text-center flex justify-center'>
+
+                    <Fade bottom><TypingEffect words={['Our Gallery    ']} />  </Fade>
+                </h2>
+
+
+
+                <Gallery />
+
+
+                <section className="bg-white dark:bg-gray-900 mb-24">
+                    <div className=" px-4 mx-auto max-w-screen-xl lg:py-">
+
+                        <h2 className=' text-4xl mb-20 text-red-600 font-bold flex justify-center'>
+
+                            <Fade bottom><TypingEffect words={['About Us    ']} />  </Fade>
+                        </h2>
+                        <div className="grid md:grid-cols-2 gap-8">
+                            <Fade left><div className="">
+                                <img className=' rounded-md' src="https://img.freepik.com/free-photo/group-boys-girl-fighting-aikido-training-martial-arts-school-healthy-lifestyle-sports-concept_155003-2630.jpg?w=1380&t=st=1687122377~exp=1687122977~hmac=fa14af45d81711af72ceef19a0377e5076b69260c215eb567680c0c1be06f7a0" alt="" />
+                            </div></Fade>
+                            <Fade right>
+                                <div
+                                    className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-10 overflow-y-auto max-h-[404px] hide-scrollbar"
+                                >
+                                    <p className="text-lg font-normal text-gray-500 dark:text-gray-400 mb-4 text-justify">
+                                        At Iron Fist, we firmly believe in empowering learners and revolutionizing education. Our dedicated team is committed to providing a visually stunning and user-friendly platform that transforms the learning experience. Our mission is to connect passionate individuals with skilled instructors, creating a vibrant and supportive community of learners.
+
+                                        With Iron Fist, you have the opportunity to dive into a vast world of knowledge and explore an extensive range of popular classes. Whether your interests lie in martial arts, fitness, music, art, cooking, coding, or any other area, our diverse selection of classes caters to various interests and learning styles.
+
+                                        We pride ourselves on offering a seamless onboarding process through our robust registration and login systems. Once you become a part of Iron Fist, our personalized dashboards empower both students and instructors to effortlessly manage their educational journey, making learning a truly enjoyable and personalized experience.
+
+                                        Our platform goes beyond just classes – it's a gateway to a network of like-minded individuals who are passionate about learning and personal growth. Connect with fellow learners, engage in discussions, and share your progress as you embark on your educational journey.
+
+                                        At Iron Fist, we value the importance of expert guidance and mentorship. Our experienced instructors bring their wealth of knowledge and expertise to the platform, offering valuable insights and guidance that will accelerate your learning and help you reach your goals.
+
+                                        We understand that everyone has their own pace and preferences when it comes to learning. That's why Iron Fist offers flexible learning options, including self-paced courses, live interactive sessions, and group collaborations, ensuring that you can tailor your learning experience to suit your needs.
+
+                                        Join us today and unlock your full potential with Iron Fist. Discover captivating classes, interact with talented instructors, and connect with a community of passionate learners. Embark on an extraordinary learning adventure and redefine the way you learn with Iron Fist.
+                                    </p>
+                                </div>
+                            </Fade>
+                        </div>
+                    </div>
+                </section>
+
 
             </main>
             <Footer />

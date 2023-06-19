@@ -1,0 +1,15 @@
+.hide-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  overflow-y: auto;
+  max-height: 404px;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  width: 0.6em;
+  background: transparent;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}

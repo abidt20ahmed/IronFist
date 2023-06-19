@@ -40,7 +40,7 @@ const InstructorClassList = ({ classData, setReload, reload, openModal, openClas
                     {className}
                 </Table.Cell>
                 <Table.Cell className=' text-center'>
-                    {instructorName}
+                    {price}
                 </Table.Cell>
                 <Table.Cell className=' text-center'>
                     {email}

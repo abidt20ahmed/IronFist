@@ -38,7 +38,7 @@ const UserTables = () => {
     // }, [user?.email])
 
     const handleRole = (email, role, name) => {
-
+        console.log(reload);
 
         fetch(`${import.meta.env.VITE_API_URL}/${role}/roles/${email}`, {
             method: 'PATCH'
@@ -46,13 +46,24 @@ const UserTables = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                refetch()
+                // refetch()
+                setReload(!reload)
                 if (data.modifiedCount) {
                     toast(`${name} is now ${role}`)
+                    console.log(reload);
                 }
             })
     }
 
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const res = await fetch(`${import.meta.env.VITE_API_URL}/roles`)
+    //         const data = await res.json()
+
+    //         return data
+    //     }
+    //     fetchData()
+    // }, [])
 
 
     //! user data
@@ -63,7 +74,7 @@ const UserTables = () => {
             .then(data => {
                 setUsers(data)
             });
-    }, [user?.email, role])
+    }, [user?.email, role, reload])
 
 
 

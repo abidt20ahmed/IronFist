@@ -10,26 +10,6 @@ const UserList = ({ userData, setReload, reload, handleRole }) => {
     // console.log(role);
 
 
-    const handleStatus = (id, status) => {
-        setReload(!reload)
-        const state = { status: status }
-        fetch(`${import.meta.env.VITE_API_URL}/role/email/${email}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(state)
-        })
-            .then(res => res.json())
-            .then(data => {
-
-                if (data.modidiedCount > 0) {
-                    toast('User Role Updated')
-                }
-            })
-    }
-
-
 
     useEffect(() => {
         const fetchData = async () => {

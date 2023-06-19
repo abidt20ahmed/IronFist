@@ -6,7 +6,7 @@ import useAuth from "./useAuth";
 const useRole = () => {
     const { user, loading } = useAuth();
 
-    const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
+    const { data: isAdmin, isLoading: isAdminLoading, refetch } = useQuery({
         queryKey: ['isAdmin', user?.email],
         enabled: !loading,
         queryFn: async () => {
@@ -15,7 +15,7 @@ const useRole = () => {
         }
     })
 
-    return [isAdmin?.role, isAdminLoading]
+    return [isAdmin?.role, isAdminLoading, refetch]
 }
 export default useRole;
 

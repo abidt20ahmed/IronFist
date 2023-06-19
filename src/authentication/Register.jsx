@@ -106,11 +106,12 @@ const Register = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async data => {
+        console.log(data);
         await createUser(data.email, data.password)
             .then(result => {
                 const createdUser = result.user
                 toast('successfully registered. Login now!')
-                addStudent(createdUser.email)
+                addStudent(createdUser.email, data.photo, data.name)
                     .then(res => res.json())
                     .then(data => {
                         // console.log(data);
@@ -118,10 +119,11 @@ const Register = () => {
                             // navigate('/classes')
                         }
 
-                    })
-                // setIsOpen(true)
                 logOut()
                 navigate('/login')
+                    })
+                // setIsOpen(true)
+                // addStudent(data.email, data.photo, data.name)
             })
             .catch(error => {
                 console.log(`${error.message}`)

@@ -4,12 +4,15 @@ import useAuth from '../hooks/useAuth';
 import { Spinner } from 'flowbite-react';
 import { toast } from 'react-toastify';
 import { Fade } from 'react-reveal';
+import { useNavigate } from 'react-router-dom';
 
 const Class = ({ refetch, classData }) => {
     const { user, loading } = useAuth()
     const [role, setRole] = useState('')
+    const navigate = useNavigate()
     const [selected, setSelected] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [enrolledId, setEnrolledId] = useState('')
     const [show, setShow] = useState(false)
     const { _id, email, className, instructorName, classImage, instructorPhoto, instructorImage, title, price, enrolled, seats, description } = classData;
     // console.log(classData.img, name, title, rate, description);
@@ -26,23 +29,35 @@ const Class = ({ refetch, classData }) => {
 
 
     useEffect(() => {
+        if (role === 'Student') {
+            console.log(user.email, _id);
+            fetch(`${import.meta.env.VITE_API_URL}/enrolled/email/${user.email}? id=${_id}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    setEnrolledId(data.classId)
+                    console.log(enrolledId, _id);
 
+                }).catch(error => console.log(error))
 
-        fetch(`${import.meta.env.VITE_API_URL}/selectedId/${_id}`)
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                if (role === 'Student') {
+            if (!_id) return
+            fetch(`${import.meta.env.VITE_API_URL}/selectedId/${_id}`)
+                .then(res => res.json())
+                .then(data => {
+                    // console.log('data');
                     setSelected(data.selectedId)
-                }
-            }).catch(error => console.log(error))
-    }, [role, _id, classData])
+                }).catch(error => console.log(error))
+        }
+    }, [role, _id, classData, user?.email, enrolledId])
 
 
 
 
     const handleSelect = (id) => {
-
+        if (!user) {
+            navigate('/login')
+            return
+        }
         const data = {
             selectedId: _id, date: new Date(), className, studentEmail: user?.email, email, instructorName, classImage, instructorPhoto, instructorImage, title, price, enrolled, seats, description
         }
@@ -85,7 +100,7 @@ const Class = ({ refetch, classData }) => {
                 <div className="p-5">
                 <div className='flex justify-between items-center py-3'>
                         <p className={`text-xl font-bold ${(seats < 1 || role === 'Admin' || role === 'Instructor') ? 'text-gray-300' : 'text-red-600'}`}>{className}</p>
-                        <button onClick={() => handleSelect(_id)} className=' text-white font-semibold bg-red-600  p-2 px-5 rounded-sm disabled:bg-gray-200' disabled={seats < 1 || role === 'Admin' || role === 'Instructor' || _id === selected}>Select</button>
+                        <button onClick={() => handleSelect(_id)} className=' text-white font-semibold bg-red-600  p-2 px-5 rounded-sm disabled:bg-gray-200' disabled={seats < 1 || role === 'Admin' || role === 'Instructor' || _id === selected || _id === enrolledId}>Select</button>
                 </div>
                     <div className='flex justify-between items-center'>
                         <h5 className={`text-2xl font-bold tracking-tight  dark:text-white mb-2 ${(seats < 1 || role === 'Admin' || role === 'Instructor') ? 'text-gray-300' : 'text-slate-800'}`}>

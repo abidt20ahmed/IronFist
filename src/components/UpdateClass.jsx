@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 const UpdateClass = ({ open, closeClassUpdate, feedbackId }) => {
 
-    const [clas, setClas] = useState()
+    const [clas, setClas] = useState([])
 
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const UpdateClass = ({ open, closeClassUpdate, feedbackId }) => {
             .then(data => {
                 setClas(data)
             })
-    }, [feedbackId])
+    }, [feedbackId, open])
 
     const handleUpdate = (event) => {
 

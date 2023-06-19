@@ -43,10 +43,10 @@ const Classes = () => {
                                 Discover Our <br /> Highly Skilled Instructors
 
 
-                        </h1>
-                        <p className="mb-8 text-lg font-semibold text-gray-300 lg:text-2xl">
-                            Meet Our Skilled Instructors Empowering You with Self-Defense Techniques.
-                        </p>
+                            </h1>
+                            <p className="mb-8 text-lg font-semibold text-gray-300 lg:text-2xl">
+                                Get Our Best Classes Empowering You with Self-Defense Techniques.
+                            </p>
                         </Zoom>
                     </div>
                 </div>
